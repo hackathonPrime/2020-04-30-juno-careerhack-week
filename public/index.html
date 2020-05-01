@@ -5,9 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <h2>SPA Authentication Sample</h2>
+    <p>Welcome to our page!</p>
+    <button id="btn-login" disabled="true" onclick="login()">Log in</button>
+    <button id="btn-logout" disabled="true" onclick="logout()">Log out</button>
+
   <div id="out"></div>
   <form onsubmit="submitForm()" id="submit-form" action="/api/data" method="POST">
     <p>
@@ -27,7 +33,6 @@
     </p>
   </form>
   <script src="/script.js"></script>
-
 </body>
 
 </html>
