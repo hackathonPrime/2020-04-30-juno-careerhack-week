@@ -32,7 +32,7 @@ const userSchema = new Schema({
 
 const articleSchema = new Schema({
   title: 'string',
-  url: mongoose.SchemaTypes.Url,
+  link: 'string',
   description: 'string',
   comments: [{body: 'string', by: mongoose.Schema.Types.ObjectId}]
 })
