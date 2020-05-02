@@ -1,65 +1,55 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const DataService = require('./services/data-service');
-// const mongoose = require('mongoose')
-// const url = 'mongodb://127.0.0.1:27017/mintbean'
+const mongoose = require('mongoose')
+const url = 'mongodb://127.0.0.1:27017/mintbean'
 
 
-// //connect to the mongoDB
+//connect to the mongoDB
 
-// mongoose.connect(url, { useNewUrlParser: true })
+mongoose.connect(url, { useNewUrlParser: true })
 
 
-// const db = mongoose.connection
+const db = mongoose.connection
 
-// //check if connection succeeds
-// db.once('open', _ => {
-//   console.log('Database connected: ', url)
-// })
+//check if connection succeeds
+db.once('open', _ => {
+  console.log('Database connected: ', url)
+})
 
-// db.on('error', err => {
-//   console.error('Connection error: ', err)
-// })
+db.on('error', err => {
+  console.error('Connection error: ', err)
+})
 
-// //define a schema
+//define a schema
 
-// const Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-// const userSchema = new Schema({
-//   username: 'string',
-//   password: 'string',
-//   comments: 'string'
-// });
+const userSchema = new Schema({
+  username: 'string',
+  password: 'string',
+  comments: 'string'
+});
 
-// //compile a model
+//compile a model
 
-// const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
-// User.create({
-//   username: 'alex',
-//   password: 'password'
-// }, function(err, alex) {
-//   if (err) return handleError(err);
-// })
+User.create({
+  username: 'alex',
+  password: 'password'
+}, function(err, alex) {
+  if (err) return handleError(err);
+})
 
 
 
 
 // Create the server app
 const app = express();
-const { join } = require('path');
 
 // register the ./public folder as the static assets directory
-app.use(express.static(join(__dirname, 'public')));
-
-app.get("/auth_config.json", (req, res) => {
-  res.sendFile(join(__dirname, "auth_config.json"));
-});
-
-// Serve the index page for all other requests
-app.get("/*", (_, res) => {
-  res.sendFile(join(__dirname, "index.html"));
-});
+app.use(express.static('public'));
 
 // express needs this in order to be able to parse JSON bodies
 app.use(bodyParser());
