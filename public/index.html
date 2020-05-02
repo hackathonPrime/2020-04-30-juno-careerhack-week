@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Hackathon News</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth__en.js"></script>
-<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css" />
+  <!-- <script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth__en.js"></script>
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css" /> -->
 </head>
 
 <body>
@@ -19,13 +19,43 @@
         </div>
     </header>
     <Main>
-      <form action="#" id="loginForm">
-        <label for="email">enter email</label>
-        <input type="email" name="email" id="email">
-        <label for="password">enter password</label>
-        <input type="password" name="password" id="password">
-        <input type="submit">
-      </form>
+      <nav>
+        <ul class="">
+          <li class="loggedIn">
+            <a href="#" class="" data-target="modal-account">Account</a>
+          </li>
+          <li class="loggedIn">
+            <a href="#" class="" id="logout">Logout</a>
+          </li>
+          <li class="loggedIn">
+            <a href="#" class="" data-target="modal-create">Create Guide</a>
+          </li>
+          <li class="loggedOut">
+            <a href="#" class="" data-target="modal-login">Login</a>
+          </li>
+          <li class="loggedOut">
+            <a id="signupLink" href="#" class="" data-target="modal-signup">Sign up</a>
+          </li>
+      </ul>
+    </nav>
+
+      <div id="modalSignup" class="modalSignup">
+        <div class="modalContent">
+          <h4>Sign up</h4>
+          <form id="signupForm">
+            <div class="inputField">
+              <input type="email" id="signupEmail" required />
+              <label for="signupEmail">Email address</label>
+            </div>
+            <div class="input-field">
+              <input type="password" id="signupPassword" required />
+              <label for="signupPassword">Choose password</label>
+            </div>
+            <button class="">Sign up</button>
+          </form>
+        </div>
+      </div>
+
       <div>
         <ul class="newsContainer">
           <li class="article">
@@ -59,15 +89,12 @@
       <input type="submit"></input>
     </p>
   </form>
-  <script src="script.js"></script>
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
 
-
-  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-
-TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries
-
-<script>
+  <script>
   // Your web app's Firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyDXdeuuCdUEDBlqULEHmLMrsx5cUH-ilG4",
@@ -80,8 +107,14 @@ TODO: Add SDKs for Firebase products that you want to use
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-</script> -->
 
+    // make auth and firestore refs
+    // make auth and firestore refs
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  </script>
+  <script src="script.js"></script>
 
 </body>
 
