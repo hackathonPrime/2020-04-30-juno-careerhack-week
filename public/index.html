@@ -31,7 +31,7 @@
             <a href="#" class="" data-target="modal-create">Create Guide</a>
           </li>
           <li class="loggedOut">
-            <a href="#" class="" data-target="modal-login">Login</a>
+            <a id="loginLink" href="#" class="" data-target="modal-login">Login</a>
           </li>
           <li class="loggedOut">
             <a id="signupLink" href="#" class="" data-target="modal-signup">Sign up</a>
@@ -52,6 +52,23 @@
               <label for="signupPassword">Choose password</label>
             </div>
             <button class="">Sign up</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="modalLogin" class="modalLogin">
+        <div class="modalContent">
+          <h4>Login</h4><br />
+          <form id="loginForm">
+            <div class="inputField">
+              <input type="email" id="loginEmail" required />
+              <label for="loginEmail">Email address</label>
+            </div>
+            <div class="inputField">
+              <input type="password" id="loginPassword" required />
+              <label for="loginPassword">Your password</label>
+            </div>
+            <button class="">Login</button>
           </form>
         </div>
       </div>
