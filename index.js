@@ -1,20 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const DataService = require('./services/data-service');
-const mongoose = require('mongoose')
-require('mongoose-type-url')
-const url = 'mongodb://127.0.0.1:27017/mintbean'
-const db = mongoose.connection
+const mongoose = require('mongoose');
+require('mongoose-type-url');
+const url = 'mongodb://127.0.0.1:27017/mintbean';
+const uri = 'mongodb://heroku_tbc5rlvh:v65i16p1fpj7c428prk7bbqsam@ds311128.mlab.com:11128/heroku_tbc5rlvh'
+const db = mongoose.connection;
 
 //connect to the mongoDB
 
-mongoose.connect(url, { useNewUrlParser: true })
+// mongoose.connect(url, { useNewUrlParser: true })
+mongoose.connect(uri)
 
 
 
 //check if connection succeeds
 db.once('open', _ => {
-  console.log('Database connected: ', url)
+  console.log('Database connected: ', uri)
 })
 
 db.on('error', err => {
@@ -32,7 +34,7 @@ const userSchema = new Schema({
 
 const articleSchema = new Schema({
   title: 'string',
-  url: mongoose.SchemaTypes.Url,
+  link: 'string',
   description: 'string',
   comments: [{body: 'string', by: mongoose.Schema.Types.ObjectId}]
 })
