@@ -42,16 +42,22 @@
 
 
   <div id="out"></div>
-  <form onsubmit="submitForm()" id="submit-form" action="/api/data" method="POST">
+  <form onsubmit="submitForm()" id="submit-form" action="/api/data/articles" method="POST">
     <p>
       <label for="title">
-        Title
-        <input name="title" />
+        Title:
+        <input name="title" required/>
+      </label>
+    </p>
+    <p>
+      <label for="link">
+        Link:
+        <input name="link" type="url" required/>
       </label>
     </p>
     <p>
       <label for="description">
-        Description
+        Description:
         <input name="description" type="text" />
       </label>
     </p>

@@ -81,9 +81,9 @@ const dataService = new DataService();
 //   res.json(list);
 // });
 
-app.get('/api/data/users', async (req, res) => {
+app.get('/api/data/articles', async (req, res) => {
   try {
-    const result = await User.find().exec()
+    const result = await Article.find().exec()
     res.send(result)
   } catch (err) {
     res.send(err)
@@ -101,13 +101,15 @@ app.get('/api/data/users', async (req, res) => {
 //   res.json(newObj);
 // });
 
-// app.post('/api/data/articles', async (req, res) => {
-//   try {
-//     const article = Article.create({
-
-//     })
-//   }
-// })
+app.post('/api/data/articles', async (req, res) => {
+  try {
+    const article = new Article(req.body);
+    const result = await article.save();
+    res.send(result)
+  } catch (err) {
+    res.status(500).send(err);
+  }
+})
 
 
 // Start the application
