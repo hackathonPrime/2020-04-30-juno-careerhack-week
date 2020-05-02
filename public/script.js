@@ -26,6 +26,7 @@ function submitForm() {
     console.log(JSON.stringify({ title, description, link }))
     fetchAndPrintData()
   });
+  
 }
   
 
