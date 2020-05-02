@@ -6,13 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth__en.js"></script>
+<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css" />
 </head>
 
 <body>
-  <h2>SPA Authentication Sample</h2>
-    <p>Welcome to our page!</p>
-    <button id="btn-login" disabled="true" onclick="login()">Log in</button>
-    <button id="btn-logout" disabled="true" onclick="logout()">Log out</button>
+  <body>
+    <header>
+        <div>
+            <img src="" alt="LOGO">
+            <h1>Prime News</h1>
+        </div>
+    </header>
+    <Main>
+      <form action="#" id="loginForm">
+        <label for="email">enter email</label>
+        <input type="email" name="email" id="email">
+        <label for="password">enter password</label>
+        <input type="password" name="password" id="password">
+        <input type="submit">
+      </form>
+      <div>
+        <ul class="newsContainer">
+          <li class="article">
+            <h2 class="newsTitle"> </h2>
+            <p class="description"> </p>
+            <p class="newsLink"></p>
+          </li>
+        </ul>
+      </div>
+    </Main>
+    <footer> 
+      <p>Copyright &#169; 2020 <span><a href="http://celesteellerby.com/">Celeste</a></span> | <span><a href="https://nickreyno.com/">Nick</a></span> | <span> <a href="http://www.opjot.com">Opjot</a></span></p>
+    </footer>
+
 
   <div id="out"></div>
   <form onsubmit="submitForm()" id="submit-form" action="/api/data" method="POST">
@@ -32,7 +59,30 @@
       <input type="submit"></input>
     </p>
   </form>
-  <script src="/script.js"></script>
+  <script src="script.js"></script>
+
+
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+
+TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries
+
+<script>
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDXdeuuCdUEDBlqULEHmLMrsx5cUH-ilG4",
+    authDomain: "hackathonprime.firebaseapp.com",
+    databaseURL: "https://hackathonprime.firebaseio.com",
+    projectId: "hackathonprime",
+    storageBucket: "hackathonprime.appspot.com",
+    messagingSenderId: "532470840059",
+    appId: "1:532470840059:web:30257cf3a329407cab4e5e"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script> -->
+
+
 </body>
 
 </html>
