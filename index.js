@@ -103,9 +103,7 @@ app.get('/api/data/users', async (req, res) => {
 
 // app.post('/api/data/articles', async (req, res) => {
 //   try {
-//     const article = Article.create({
-
-//     })
+//     const article = Article.create(req.body)
 //   }
 // })
 
