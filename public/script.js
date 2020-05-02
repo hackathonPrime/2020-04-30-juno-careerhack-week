@@ -27,17 +27,7 @@ function submitForm() {
     fetchAndPrintData()
   });
 
-	fetch("/api/data", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ title, description }),
-	}).then(() => {
-		console.log(JSON.stringify({ title, description }));
-		fetchAndPrintData();
-	});
-}
+  
 
 // run this on load
 fetchAndPrintData();
