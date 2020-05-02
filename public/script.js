@@ -30,3 +30,27 @@ function submitForm() {
 
 // run this on load
 fetchAndPrintData();
+
+
+
+
+//user auth
+
+
+// document.addEventListener('DOMContentLoaded', (event) => {
+
+//   const userAuth = function() {
+//     let email = document.getElementById('email');
+//     let password = document.getElementById('password');
+//     firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+//       // Handle Errors here.
+//       var errorCode = error.code;
+//       var errorMessage = error.message;
+//       // 
+//       console.log('form submitted',email,password)
+//     });
+//   }
+//   const form = document.getElementById('loginForm');
+//   form.addEventListener('submit', userAuth);
+  
+//   })
