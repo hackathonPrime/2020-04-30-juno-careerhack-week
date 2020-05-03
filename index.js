@@ -81,7 +81,7 @@ db.on('error', err => {
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  user: 'string',
+  signupUsername: 'string',
   email: 'string',
 });
 
@@ -170,7 +170,7 @@ app.post('/api/data/articles', async (req, res) => {
 
 app.post('/api/data/users', async (req, res) => {
   try {
-    const user = User.create(req.body);
+    const user = new User(req.body);
     const result = await user.save();
     res.send(result);
   } catch (err) {

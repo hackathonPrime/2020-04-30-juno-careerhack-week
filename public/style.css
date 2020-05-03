@@ -10,14 +10,21 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 .visuallyHidden:not(:focus):not(:active) { position: absolute; width: 1px; height: 1px; margin: -1px;border: 0;padding: 0;white-space: nowrap;clip-path: inset(100%);clip: rect(00 0 0);overflow: hidden;}
 
 :root{
-	--raisinBlack: #211A1D;
-	--darkPurp: #6320EE;
-	--notBlue: #8075FF;
-	--magnolio: #F8F0FB;
-	--salsaRed: #E54B4B;
-	--seaGreen: #45BB7F;
-	--champagnePink: #EDD3C4
+	--primaryDark: #211A1D;
+	--primaryMed: #6320EE;
+	--primaryLight: #8075FF;
+	--secondary: #F8F0FB;
+	--tertiary: #EDD3C4;
+	--accent1: #E54B4B;
+	--accent2: #45BB7F;
+}
 
+html {
+	font-size: 62.5%;
+}
+
+body {
+	background: var(--secondary);
 }
 
 
@@ -32,28 +39,37 @@ label {
 
 header{
 	width:100%;
-	background: var(--notBlue);
+	background: var(--primaryLight);
 	position:fixed;
 	top:0;
 	z-index: 2;
 }
 
-.headerContainer, .title, .nav{
+.headerContainer, .nav, .title form{
 	display:flex;
 	flex-direction:row;
 }
 
 .title{
-	width:25%;
-	margin-left:50px
+	display:flex;
+	flex-direction:column;
+	width:60%;
+	margin-left:50px;
+}
+
+.searchButton{
+	height:50%;
+	width: fit-content;
+	margin-left:20px;
 }
 
 .navbar{
-	width:75%
+	width:40%;
 }
 
 .nav{
 	justify-content: right;
+	align-items: baseline;
 	margin-right:50px;
 }
 
@@ -64,21 +80,30 @@ li{
 
 a{
 	text-decoration: none;
-	color:inherit
+	color:inherit;
 }
 
 .wrapper{
 	margin:0 50px;
-	max-width:1300px
+	max-width:1300px;
 }
 
-.modalSignup, .modalLogin{
+.modalSignup, .modalLogin,
+.modalArticle{
 	width: 100%;
 	display:flex;
 	align-items: center;
 	justify-content: center;
 	margin-top:300px;
-	display:none
+	display:none;
+}
+
+.closeSignupModal,
+.closeLoginModal,
+.closeArticleModal {
+	position: absolute;
+	top: 20px;
+	right: 20px;
 }
 
 /* footer covers bottom of page gotta make it so bottom is shown by being able to scroll more. */
@@ -89,36 +114,75 @@ a{
 	flex-direction:column;
 	align-items: center;
 	text-align: center;
-	background: var(--darkPurp);
+	background: var(--primaryMed);
 	width:60%;
 	padding:75px 0;
-	font-size:20px
+	font-size:20px;
+	position: relative;
 }
 
 .postArticleForm{
 	margin-top:150px;
-	font-size:20px
+	font-size:20px;
 }
 
 h4{
 	font-size: 50px;
 	margin:0;
-	padding-bottom:20px
+	padding-bottom:20px;
 }
 
 footer{
 	position:fixed;
 	bottom:0;
-	background: var(--notBlue);
+	background: var(--primaryLight);
 	width:100%;
-	text-align:center
-}
-
-.placeholder {
-	position: relative;
-	height: 200px;
+	text-align:center;
 }
 
 .hide {
 	display: none;
+}
+
+.newsContainer {
+	margin-top: 150px;
+	margin-bottom: 150px;;
+}
+
+.newsContainer li {
+	position: relative;
+	margin: 20px auto;
+	width: 80%;
+	max-width: 800px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	background: #FAFAFA;
+	border-radius: 5px;
+	border: 2px solid var(--primaryLight);
+}
+
+.newsContainer h2 {
+	margin: 10px;
+}
+
+.voteContainer {
+	position: relative;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+}
+
+.upVote,
+.downVote {
+	background:none;
+	border:none;
+	font-size: 2rem;
+}
+
+.upVote {
+	color: var(--accent2);
+}
+.downVote {
+	color: var(--accent1);
 }

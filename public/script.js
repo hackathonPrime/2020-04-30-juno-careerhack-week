@@ -4,7 +4,12 @@ const commentForm = `<form action="" class="commentForm">
 <label for="comment">enter comment below</label>
 <input type="textarea" name="comment">
 <input type="submit">
-</form>`
+</form>`;
+
+const voting = `<div class="voteContainer">
+<button class="upVote"><span class="sr-only">upvote this article</span><i class="fas fa-caret-up"></i></button> 5
+<button class="downVote"><span class="sr-only">downvote this article</span><i class="fas fa-caret-down"></i></button> 0
+</div>`;
 function fetchAndPrintData() {
 	fetch("/api/data/articles")
 		.then((data) => data.json())
@@ -12,17 +17,18 @@ function fetchAndPrintData() {
 			json.reverse();
 			json.forEach((article) => {
 				console.log(article);
-				const { created_at, description, link, title } = article;
+				const { _id, created_at, description, link, title } = article;
 				const utcDate = created_at;
 				const localDate = new Date(utcDate);
 				const date = localDate.toDateString();
 				const time = localDate.toTimeString().split("-");
-				const htmlToAppend = ` <li class="article">
-        <p>posted on ${date} at ${time[0]}</p>
-            <h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
-            <p class="description"> ${description} </p>
-            ${commentForm}
-          </li>`
+				const htmlToAppend = ` <li class="article ${_id}">
+				${voting}
+				<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
+				<p>posted on ${date} at ${time[0]}</p>
+		<p class="description"> ${description} </p>
+		${commentForm}
+	</li>`;
 				newsContainer.innerHTML += htmlToAppend;
 			});
 		});
@@ -43,18 +49,20 @@ const searchFunction = function (query) {
 					const date = localDate.toDateString();
 					const time = localDate.toTimeString().split("-");
 					const htmlToAppend = ` <li class="article">
-        <p>posted on ${date} at ${time[0]}</p>
-            <h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
+					<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
+					<p>posted on ${date} at ${time[0]}</p>
             <p class="description"> ${description} </p>
-          </li>
-          ${commentForm}`;
+			${commentForm}
+		</li>`;
 					newsContainer.innerHTML += htmlToAppend;
 				}
 			});
 		});
 };
 
+//functions in the nav bar
 
+//search function
 const searchForm = document.querySelector(".searchForm");
 searchForm.addEventListener("submit", (e) => {
 	e.preventDefault();
@@ -69,10 +77,7 @@ clearFilterButton.addEventListener("click", () => {
 	fetchAndPrintData();
 });
 
-// target for article form reset
-const postArticleForm = document.querySelector(".postArticleForm");
-
-// Submits the form and refreshes the data
+// Submits the article form and refreshes the data
 function submitForm() {
 	event.preventDefault();
 
@@ -91,31 +96,44 @@ function submitForm() {
 		postArticleForm.reset();
 	});
 }
+// article form
+const postArticleForm = document.querySelector(".postArticleForm");
 
 // run this on load
 fetchAndPrintData();
 postArticleForm.reset();
 
-//user auth
-
-//auth constants
+// user auth constants
 const signupForm = document.querySelector("#signupForm");
-const signupLink = document.querySelector("#signupLink");
 const loginForm = document.querySelector("#loginForm");
+
+// navbar constants
+const postArticleLink = document.querySelector("#postArticleLink");
 const loginLink = document.querySelector("#loginLink");
+const signupLink = document.querySelector("#signupLink");
 const logoutLink = document.querySelector("#logout");
 
-// target for form toggle
+// form constants for display purposes
 const modalSignup = document.querySelector(".modalSignup");
 const modalLogin = document.querySelector(".modalLogin");
+const modalArticle = document.querySelector(".modalArticle");
+const closeSignupModal = document.querySelector(".closeSignupModal");
+const closeLoginModal = document.querySelector(".closeLoginModal");
+const closeArticleModal = document.querySelector(".closeArticleModal");
 
+
+const userObjects = {}
 // listen for auth status changes
 auth.onAuthStateChanged((user) => {
-	// determine which auth links to display in the nav
+
+	// determine which auth nav links to display based on signed in/out
 	if (user) {
+    userObjects.username = user.displayName;
+    userObjects.email = user.email;
 		loginLink.closest("li").style.display = "none";
 		signupLink.closest("li").style.display = "none";
 		logoutLink.closest("li").style.display = "inline";
+		console.log(user.displayName)
 	} else {
 		logoutLink.closest("li").style.display = "none";
 		loginLink.closest("li").style.display = "inline";
@@ -123,32 +141,35 @@ auth.onAuthStateChanged((user) => {
 	}
 });
 
-// sign up show modal
+// show sign up modal
 signupLink.addEventListener("click", () => {
 	modalSignup.style.display = "block";
 	modalLogin.style.display = "none";
 });
+// show login modal
 loginLink.addEventListener("click", () => {
 	modalLogin.style.display = "block";
 	modalSignup.style.display = "none";
 });
 
-//send user data to mongodb
-const sendUser = (displayName) => {
-    fetch("/api/data/users", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ displayName }),
-  }).then(() => {
-    console.log('user added')
-  })
-}
 
+// show post article modal
+postArticleLink.addEventListener("click", () => {
+	modalArticle.style.display = "block";
+});
 
-
-
+// close signup
+closeSignupModal.addEventListener("click", () => {
+	modalSignup.style.display = "none";
+});
+// close login
+closeLoginModal.addEventListener("click", () => {
+	modalLogin.style.display = "none";
+});
+// close post article
+closeArticleModal.addEventListener("click", () => {
+	modalArticle.style.display = "none";
+});
 
 
 // sign up function
@@ -156,62 +177,52 @@ signupForm.addEventListener("submit", (e) => {
 	e.preventDefault();
 
 	// get user info
-	const email = signupForm["signupEmail"].value;
-	const password = signupForm["signupPassword"].value;
-	const signupUsername = signupForm["signupUsername"].value;
+	// const email = signupForm["signupEmail"].value;
+	// const password = signupForm["signupPassword"].value;
+	// const signupUsername = signupForm["signupUsername"].value;
+
+  const signupUsername = e.target.signupUsername.value
+  const email = e.target.signupEmail.value
+  const password = e.target.signupPassword.value
+
+
 
 	// sign up this user in firebase
 	auth.createUserWithEmailAndPassword(email, password).then((cred) => {
 		// if valid response, take the username
 		if (cred) {
-      // cred.displayName = signupUsername;
-      const user = firebase.auth().currentUser;
-      let displayName, idToken;
+			const user = firebase.auth().currentUser;
+			let displayName, idToken;
 
-      user.updateProfile({
-        displayName: signupUsername
-      }).then(() => {
-        const user = firebase.auth().currentUser;
-        // console.log(user.displayName)
-        displayName = user.displayName;
-      })
-    }
-    
+			user
+				.updateProfile({
+					displayName: signupUsername,
+				})
+				.then(() => {
+					// console.log(user.displayName)
+					displayName = user.displayName;
+				});
+		}
 
 		modalSignup.style.display = "none";
 		signupForm.reset();
 	});
 });
 
+// login function
 loginForm.addEventListener("submit", (e) => {
 	e.preventDefault();
 	const email = loginForm["loginEmail"].value;
 	const password = loginForm["loginPassword"].value;
 	auth.signInWithEmailAndPassword(email, password).then((cred) => {
 		modalLogin.style.display = "none";
-    loginForm.reset();
+		loginForm.reset();
 	});
 });
-
+// logout function
 logoutLink.addEventListener("click", (e) => {
 	e.preventDefault();
 	auth.signOut().then(() => {
 		console.log("user has signed out");
 	});
 });
-
-//TODO
-//use this to post username to span
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    const user = firebase.auth().currentUser;
-    console.log(user.displayName)
-    user.getIdToken().then((idToken) => {
-      console.log(idToken)
-    }).catch(err => {
-      console.log(err)
-    })
-  } else {
-    console.log('user signed out')
-  }
-})
