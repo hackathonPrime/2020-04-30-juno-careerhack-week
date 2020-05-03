@@ -52,8 +52,8 @@
             <h4>Sign-Up</h4>
             <form id="signupForm">
               <div class="inputField">
-                <input type="text" placeholder="username" name="signupUsername" id="signupUsername" required>
-                <label for="signupUsername">username</label>
+                <input type="text" placeholder="Username" name="signupUsername" id="signupUsername" required>
+                <label for="signupUsername">Username</label>
                 <input type="email" placeholder="Email Address" id="signupEmail" required />
                 <label for="signupEmail">Email Address</label>
               </div>
@@ -61,7 +61,7 @@
                 <input type="password" placeholder="Password" id="signupPassword" required />
                 <label for="signupPassword">Choose Password</label>
               </div>
-              <button class="">Sign-Up</button>
+              <button class="formButton">Sign-Up</button>
             </form>
           </div>
         </div>
@@ -79,7 +79,7 @@
                 <input type="password" placeholder="Password" id="loginPassword" required />
                 <label for="loginPassword">Your Password</label>
               </div>
-              <button class="">Login</button>
+              <button class="formButton">Login</button>
             </form>
           </div>
         </div>
@@ -89,27 +89,13 @@
             <button class="closeArticleModal"><span class="sr-only">close form</span>X</button>
             <h4>Publish an Article</h4>
             <form onsubmit="submitForm()" class="postArticleForm" id="submit-form" action="/api/data/articles" method="POST">
-              <p>
-                <label for="title">
-                  Title:
-                  <input name="title" required/>
-                </label>
-              </p>
-              <p>
-                <label for="link">
-                  Link:
-                  <input name="link" type="text" required/>
-                </label>
-              </p>
-              <p>
-                <label for="description">
-                  Description:
-                  <input name="description" type="text" />
-                </label>
-              </p>
-              <p>
-                <input type="submit"></input>
-              </p>
+                <label class="sr-only" for="title">Title:</label>
+                  <input name="title" placeholder="Title" required/>
+                <label class="sr-only" for="link"> Link:</label>
+                  <input name="link" placeholder="URL Link" type="text" required/>
+                <label class="sr-only" for="description"> Description:</label>
+                  <input name="description"  placeholder="Description" type="text" />
+                <input class="formButton" type="submit"></input>
             </form>
           </div>
         </div>

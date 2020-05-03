@@ -150,16 +150,20 @@ auth.onAuthStateChanged((user) => {
 signupLink.addEventListener("click", () => {
 	modalSignup.style.display = "block";
 	modalLogin.style.display = "none";
+	modalArticle.style.display = "none"
 });
 // show login modal
 loginLink.addEventListener("click", () => {
 	modalLogin.style.display = "block";
 	modalSignup.style.display = "none";
+	modalArticle.style.display = "none"
 });
 
 // show post article modal
 postArticleLink.addEventListener("click", () => {
 	modalArticle.style.display = "block";
+	modalLogin.style.display = "none";
+	modalSignup.style.display = "none";
 });
 
 // close signup
