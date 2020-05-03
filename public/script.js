@@ -1,60 +1,70 @@
 // Gets the data and outputs it to the `out` div
 function fetchAndPrintData() {
-	fetch("/api/data")
+	fetch("/api/data/articles")
 		.then((data) => data.json())
 		.then((json) => {
-      // console.log(json)
-			document.getElementById("out").textContent = JSON.stringify(json);
+			json.forEach((article) => {
+				const { title, description, link } = article;
+        const htmlToAppend = ` <li class="article">
+            <h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
+            <p class="description"> ${description} </p>
+          </li>`;
+
+          const newsContainer = document.querySelector('.newsContainer')
+          newsContainer.innerHTML += htmlToAppend
+      });
 		});
 }
+// target for article form reset
+const postArticleForm = document.querySelector('.postArticleForm')
 
 // Submits the form and refreshes the data
 function submitForm() {
 	event.preventDefault();
 
-  const title = event.target.title.value;
-  const description = event.target.description.value;
+	const title = event.target.title.value;
+	const description = event.target.description.value;
   const link = event.target.link.value;
 
-  fetch('/api/data/articles', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ title, description, link })
-  })
-  .then(() => {
-    console.log(JSON.stringify({ title, description, link }))
-    fetchAndPrintData()
-  });
-  
+	fetch("/api/data/articles", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ title, description, link }),
+	}).then(() => {
+		console.log(JSON.stringify({ title, description, link }));
+    fetchAndPrintData();
+    postArticleForm.reset();
+    
+	});
 }
-  
 
 // run this on load
 fetchAndPrintData();
+postArticleForm.reset();
 
 //user auth
 
-//user auth variables
+//signup
 const signupForm = document.querySelector("#signupForm");
 const signupLink = document.querySelector("#signupLink");
 const loginForm = document.querySelector("#loginForm");
 const loginLink = document.querySelector("#loginLink");
 const logoutLink = document.querySelector("#logout");
 
-// to toggle modal visibility
-const signupFormVisible = document.querySelector('.modalSignup');
-const loginFormVisible = document.querySelector('.modalLogin');
+// target for form toggle
+const modalSignup = document.querySelector('.modalSignup')
+const modalLogin = document.querySelector('.modalLogin')
 
 // sign up show modal
 signupLink.addEventListener("click", () => {
-  signupFormVisible.style.display = "block";
-  loginFormVisible.style.display = "none";
+  modalSignup.style.display = "block";
+  modalLogin.style.display = "none";
 });
 loginLink.addEventListener("click", () => {
-  loginFormVisible.style.display = "block";
-  signupFormVisible.style.display = "none";
+  modalLogin.style.display = "block";
+  modalSignup.style.display = "none";
 });
 // sign up function
 signupForm.addEventListener("submit", (e) => {
@@ -66,21 +76,20 @@ signupForm.addEventListener("submit", (e) => {
 
 	// sign up this user in firebase
 	auth.createUserWithEmailAndPassword(email, password).then((cred) => {
-		const modal = document.querySelector("#modalSignup");
+		signupForm.style.display = "none";
 		signupForm.reset();
-		signupFormVisible.style.display = "none";
 	});
 });
 
 loginForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const email = loginForm['loginEmail'].value;
-  const password = loginForm['loginPassword'].value;
-  auth.signInWithEmailAndPassword(email, password).then((cred)=>{
-console.log(cred.user, 'user has logged in');
-loginForm.reset();
-loginFormVisible.style.display = "none";
-  })
+	e.preventDefault();
+	const email = loginForm["loginEmail"].value;
+	const password = loginForm["loginPassword"].value;
+	auth.signInWithEmailAndPassword(email, password).then((cred) => {
+		console.log(cred.user, "user has logged in");
+		loginForm.style.display = "none";
+		loginForm.reset();
+	});
 });
 
 logoutLink.addEventListener("click", (e) => {

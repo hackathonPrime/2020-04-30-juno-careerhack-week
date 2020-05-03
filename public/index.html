@@ -47,6 +47,8 @@
             <h4>Sign-Up</h4>
             <form id="signupForm">
               <div class="inputField">
+                <input type="text" placeholder="username" name="signupUsername" id="signupUsername" required>
+                <label for="signupUsername">username</label>
                 <input type="email" placeholder="Email Address" id="signupEmail" required />
                 <label for="signupEmail">Email Address</label>
               </div>
@@ -78,11 +80,6 @@
 
         <div>
           <ul class="newsContainer">
-            <li class="article">
-              <h2 class="newsTitle"> </h2>
-              <p class="description"> </p>
-              <p class="newsLink"></p>
-            </li>
           </ul>
         </div>
       </Main>
@@ -91,7 +88,7 @@
       </footer>
 
   <div id="out"></div>
-  <form onsubmit="submitForm()" id="submit-form" action="/api/data/articles" method="POST">
+  <form onsubmit="submitForm()" class="postArticleForm" id="submit-form" action="/api/data/articles" method="POST">
     <p>
       <label for="title">
         Title:
