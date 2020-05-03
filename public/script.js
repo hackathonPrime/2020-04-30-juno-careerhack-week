@@ -5,6 +5,11 @@ const commentForm = `<form action="" class="commentForm">
 <input type="textarea" name="comment">
 <input type="submit">
 </form>`;
+
+const voting = `<div class="voteContainer">
+<button class="upVote"><span class="sr-only">upvote this article</span><i class="fas fa-caret-up"></i></button> 5
+<button class="downVote"><span class="sr-only">downvote this article</span><i class="fas fa-caret-down"></i></button> 0
+</div>`
 function fetchAndPrintData() {
 	fetch("/api/data/articles")
 		.then((data) => data.json())
@@ -18,8 +23,9 @@ function fetchAndPrintData() {
 				const date = localDate.toDateString();
 				const time = localDate.toTimeString().split("-");
 				const htmlToAppend = ` <li class="article ${_id}">
-        <p>posted on ${date} at ${time[0]}</p>
-		<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
+				${voting}
+				<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
+				<p>posted on ${date} at ${time[0]}</p>
 		<p class="description"> ${description} </p>
 		${commentForm}
 	</li>`;
@@ -43,11 +49,11 @@ const searchFunction = function (query) {
 					const date = localDate.toDateString();
 					const time = localDate.toTimeString().split("-");
 					const htmlToAppend = ` <li class="article">
-        <p>posted on ${date} at ${time[0]}</p>
-            <h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
+					<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
+					<p>posted on ${date} at ${time[0]}</p>
             <p class="description"> ${description} </p>
-          </li>
-          ${commentForm}`;
+			${commentForm}
+		</li>`
 					newsContainer.innerHTML += htmlToAppend;
 				}
 			});
