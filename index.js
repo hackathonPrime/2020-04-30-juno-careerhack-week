@@ -36,11 +36,13 @@ const userSchema = new Schema({
 //add 
 const articleSchema = new Schema({
   title: 'string',
+  
   link: 'string',
   description: 'string',
   votes: Number,
   comments: [{body: 'string', by: mongoose.Schema.Types.ObjectId}]
-})
+}, {timestamps: {createdAt: 'created_at'}})
+
 
 //compile a model
 
