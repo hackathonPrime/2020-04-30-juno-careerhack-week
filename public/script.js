@@ -82,7 +82,7 @@ signupForm.addEventListener("submit", (e) => {
 
 	// sign up this user in firebase
 	auth.createUserWithEmailAndPassword(email, password).then((cred) => {
-		signupForm.style.display = "none";
+		modalSignup.style.display = "none";
 		signupForm.reset();
 	});
 });
@@ -93,7 +93,7 @@ loginForm.addEventListener("submit", (e) => {
 	const password = loginForm["loginPassword"].value;
 	auth.signInWithEmailAndPassword(email, password).then((cred) => {
 		console.log(cred.user, "user has logged in");
-		loginForm.style.display = "none";
+		modalLogin.style.display = "none";
 		loginForm.reset();
 	});
 });
