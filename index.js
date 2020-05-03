@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const DataService = require('./services/data-service');
 const mongoose = require('mongoose');
 require('mongoose-type-url');
-const url = 'mongodb://127.0.0.1:27017/mintbean';
+// const url = 'mongodb://127.0.0.1:27017/mintbean';
 const uri = 'mongodb://heroku_tbc5rlvh:v65i16p1fpj7c428prk7bbqsam@ds311128.mlab.com:11128/heroku_tbc5rlvh'
 const db = mongoose.connection;
 
@@ -32,10 +32,13 @@ const userSchema = new Schema({
   password: 'string',
 });
 
+
+//add 
 const articleSchema = new Schema({
   title: 'string',
   link: 'string',
   description: 'string',
+  votes: Number,
   comments: [{body: 'string', by: mongoose.Schema.Types.ObjectId}]
 })
 
@@ -43,18 +46,15 @@ const articleSchema = new Schema({
 
 //somehow connect oauth to this
 const User = mongoose.model('User', userSchema);
-const Article = mongoose.model('Article', articleSchema)
-
-//POST
-// User.create({
-//   username: 'jamie',
-//   password: 'password'
-// }, function(err, alex) {
-//   if (err) return handleError(err);
-// })
+const Article = mongoose.model('Article', articleSchema);
 
 
 
+//delete all
+// Article.deleteMany({}, function (err) {
+//   if (err) console.log(err);
+//   console.log('successful deletion')
+// });
 
 
 // Create the server app
