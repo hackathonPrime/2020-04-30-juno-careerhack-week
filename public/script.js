@@ -34,6 +34,11 @@ function fetchAndPrintData() {
 		});
 }
 
+
+
+
+
+
 // display articles according to search filter
 const searchFunction = function (query) {
 	fetch("/api/data/articles")

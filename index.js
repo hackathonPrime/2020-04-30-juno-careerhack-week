@@ -80,27 +80,33 @@ db.on('error', err => {
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  signupUsername: 'string',
-  email: 'string',
-});
+// const userSchema = new Schema({
+//   signupUsername: 'string',
+//   email: 'string',
+// });
 
 
 //add 
 const articleSchema = new Schema({
   title: 'string',
-  
   link: 'string',
   description: 'string',
   votes: Number,
-  comments: [{body: 'string', by: mongoose.Schema.Types.ObjectId}]
+  comments: [{body: 'string', username: 'string', email: 'string'}]
 }, {timestamps: {createdAt: 'created_at'}})
+
+//when you comment, get li id for database entry
+//get username from firebase.auth obj
+//
+
+
+
 
 
 //compile a model
 
 //somehow connect oauth to this
-const User = mongoose.model('User', userSchema);
+// const User = mongoose.model('User', userSchema);
 const Article = mongoose.model('Article', articleSchema);
 
 
