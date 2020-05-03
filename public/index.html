@@ -24,8 +24,8 @@
             <button class="clearFilter">clear filter</button>
           </form>
           <ul class="nav">
-            <li class="loggedIn">
-              <a href="#" class="" data-target="modal-account">Account</a>
+            <li class="postArticle">
+              <a href="#" id="postArticleLink">Post Article</a>
             </li>
             <li class="loggedIn">
               <a href="#" class="" id="logout">Logout</a>
@@ -68,7 +68,7 @@
         <div id="modalLogin" class="modalLogin">
           <div class="modalContent">
             <button class="closeLoginModal"><span class="sr-only">close form</span>X</button>
-            <h4>Login</h4><br />
+            <h4>Login</h4>
             <form id="loginForm">
               <div class="inputField">
                 <input type="email" placeholder="Email Address" id="loginEmail" required />
@@ -83,6 +83,36 @@
           </div>
         </div>
 
+        <div id="modalArticle" class="modalArticle">
+          <div class="modalContent">
+            <button class="closeArticleModal"><span class="sr-only">close form</span>X</button>
+            <h4>Publish an Article</h4>
+            <form onsubmit="submitForm()" class="postArticleForm" id="submit-form" action="/api/data/articles" method="POST">
+              <p>
+                <label for="title">
+                  Title:
+                  <input name="title" required/>
+                </label>
+              </p>
+              <p>
+                <label for="link">
+                  Link:
+                  <input name="link" type="text" required/>
+                </label>
+              </p>
+              <p>
+                <label for="description">
+                  Description:
+                  <input name="description" type="text" />
+                </label>
+              </p>
+              <p>
+                <input type="submit"></input>
+              </p>
+            </form>
+          </div>
+        </div>
+
         <div>
           <ul class="newsContainer">
           </ul>
@@ -91,31 +121,6 @@
       <footer> 
         <p>Copyright &#169; 2020 <span><a href="http://celesteellerby.com/">Celeste</a></span> | <span><a href="https://nickreyno.com/">Nick</a></span> | <span> <a href="http://www.opjot.com">Opjot</a></span></p>
       </footer>
-
-  <div id="out"></div>
-  <form onsubmit="submitForm()" class="postArticleForm" id="submit-form" action="/api/data/articles" method="POST">
-    <p>
-      <label for="title">
-        Title:
-        <input name="title" required/>
-      </label>
-    </p>
-    <p>
-      <label for="link">
-        Link:
-        <input name="link" type="text" required/>
-      </label>
-    </p>
-    <p>
-      <label for="description">
-        Description:
-        <input name="description" type="text" />
-      </label>
-    </p>
-    <p>
-      <input type="submit"></input>
-    </p>
-  </form>
       <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>

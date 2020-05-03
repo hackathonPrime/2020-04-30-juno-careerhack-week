@@ -4,7 +4,7 @@ const commentForm = `<form action="" class="commentForm">
 <label for="comment">enter comment below</label>
 <input type="textarea" name="comment">
 <input type="submit">
-</form>`
+</form>`;
 function fetchAndPrintData() {
 	fetch("/api/data/articles")
 		.then((data) => data.json())
@@ -12,17 +12,17 @@ function fetchAndPrintData() {
 			json.reverse();
 			json.forEach((article) => {
 				console.log(article);
-				const { created_at, description, link, title } = article;
+				const { _id, created_at, description, link, title } = article;
 				const utcDate = created_at;
 				const localDate = new Date(utcDate);
 				const date = localDate.toDateString();
 				const time = localDate.toTimeString().split("-");
-				const htmlToAppend = ` <li class="article">
+				const htmlToAppend = ` <li class="article ${_id}">
         <p>posted on ${date} at ${time[0]}</p>
-            <h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
-            <p class="description"> ${description} </p>
-            ${commentForm}
-          </li>`
+		<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
+		<p class="description"> ${description} </p>
+		${commentForm}
+	</li>`;
 				newsContainer.innerHTML += htmlToAppend;
 			});
 		});
@@ -100,18 +100,21 @@ postArticleForm.reset();
 
 // user auth constants
 const signupForm = document.querySelector("#signupForm");
-const signupLink = document.querySelector("#signupLink");
 const loginForm = document.querySelector("#loginForm");
+
+// navbar constants
+const postArticleLink = document.querySelector("#postArticleLink");
 const loginLink = document.querySelector("#loginLink");
+const signupLink = document.querySelector("#signupLink");
 const logoutLink = document.querySelector("#logout");
 
 // form constants for display purposes
 const modalSignup = document.querySelector(".modalSignup");
 const modalLogin = document.querySelector(".modalLogin");
+const modalArticle = document.querySelector(".modalArticle");
 const closeSignupModal = document.querySelector(".closeSignupModal");
 const closeLoginModal = document.querySelector(".closeLoginModal");
-
-
+const closeArticleModal = document.querySelector(".closeArticleModal");
 
 // listen for auth status changes
 auth.onAuthStateChanged((user) => {
@@ -138,15 +141,23 @@ loginLink.addEventListener("click", () => {
 	modalSignup.style.display = "none";
 });
 
-// close auth modals
-closeSignupModal.addEventListener('click',()=>{
-	modalSignup.style.display = 'none';
-})
+// show post article modal
+postArticleLink.addEventListener("click", () => {
+	modalArticle.style.display = "block";
+});
 
-closeLoginModal.addEventListener('click',()=>{
-	modalLogin.style.display = 'none';
-})
-
+// close signup
+closeSignupModal.addEventListener("click", () => {
+	modalSignup.style.display = "none";
+});
+// close login
+closeLoginModal.addEventListener("click", () => {
+	modalLogin.style.display = "none";
+});
+// close post article
+closeArticleModal.addEventListener("click", () => {
+	modalArticle.style.display = "none";
+});
 
 // sign up function
 signupForm.addEventListener("submit", (e) => {
