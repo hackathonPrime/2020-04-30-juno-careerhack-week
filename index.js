@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const DataService = require('./services/data-service');
+// const DataService = require('./services/data-service');
 const mongoose = require('mongoose');
 require('mongoose-type-url');
 // const url = 'mongodb://127.0.0.1:27017/mintbean';
@@ -9,8 +9,62 @@ const db = mongoose.connection;
 
 //connect to the mongoDB
 
+const classmates = [
+  {
+    "title": "The Best Medium-Hard Data Analyst SQL Interview Questions  ",
+    "description": "The first 70% of SQL is pretty straightforward but the remaining 30% can be pretty tricky.",
+    "link": "https://quip.com/2gwZArKuWk7W",
+  },
+  {
+    "title": "Nintendo says Tom Nook is a ‘good guy.’",
+    "description": "Tom Nook's redemption arch backstory",
+    "link": "https://www.washingtonpost.com/video-games/2020/04/09/tom-nook-animal-crossing-not-evil/",
+  },
+  {
+    "title": "Is this fungi *really* a fun guy?",
+    "description": "I built a silly game called “Is this fungi a fun guy” for a class project a few months ago. I mainly decided to do this quiz because I had just recently watched “Fantastic Fungi,” a documentary about mushrooms and how important and interesting they are in the natural world. It blew me away, and it seemed like a funny and interesting concept for a true/false quiz game.",
+    "link": "https://medium.com/@mikeleriche/is-this-fungi-really-a-fun-guy-a450f37b6158",
+  },
+  {
+    "title": "My Beer Selection",
+    "description": "I created this web application to allow my users to make personal beer selections based on their tastes. Using beer data from PUNK API, I made two separate forms — one for flavours and the other for food pairings. Using each form, users can get a beer recommended based on their choice.",
+    "link": "https://medium.com/@claudiamhahn/my-beer-selection-e9eb2f1f23ae",
+  },
+  {
+    "title": "Learning Code with ADHD: Lists",
+    "description": "hings have been rather chaotic lately, and the stress of Covid and everything around it made things a little harder to keep track of lately. ",
+    "link": "https://medium.com/@ECSYoungCodes/learning-code-with-adhd-lists-b464d239c3ba",
+  },
+  {
+    "title": "Perfectionism and Web Development",
+    "description": "My perfectionism has never really bothered me or impacted me professionally. ",
+    "link": "https://medium.com/@steph.vm.kerr/perfectionism-and-web-development-e7a59cd7e631",
+  },
+  {
+    "title": "Tighten Up: How Learning React.js Helped Me Code Differently",
+    "description": "I am currently on the cusp of week eight of nine of bootcamp at Juno College in Toronto, and the last 2 weeks have transformed the way I approach both my code and my view of the world.",
+    "link": "https://medium.com/@afuafrimpong4/tighten-up-how-learning-react-js-helped-me-code-differently-cfa81e1b89f2",
+  },
+  {
+    "title": "Welcome to the Jam: web development in the age of Space Jam",
+    "description": "Ever since starting my web development journey, it’s become really interesting to inspect the code on various websites and see all the different approaches that developers take.",
+    "link": "https://medium.com/@brittsays/welcome-to-the-jam-web-development-in-the-age-of-space-jam-e60f88eccc08",
+  },
+  {
+    "title": "Navigating the Divide Between the Screen and the Self",
+    "description": "Hello friends. The last time we spoke I had just finished my first week of coding bootcamp. Over the last two weeks there have been a lot of late nights, early mornings, weekends spent working tirelessly to complete projects, and hours spent debugging issues that typically concluded with a classic facepalm.",
+    "link": "https://medium.com/@ken.taylor.codes/navigating-the-divide-between-the-screen-and-the-self-24f4989498c3",
+  },
+]
+
 // mongoose.connect(url, { useNewUrlParser: true })
-mongoose.connect(uri)
+mongoose.connect(uri, function (err, db) {
+  if (err) throw err;
+  // db.collection('articles').insertMany(classmates, (err, res) => {
+  //   if (err) console.log(err);
+  //   console.log('number of documents inserted: ' + res.insertedCount)
+  // }).save()
+})
 
 
 
@@ -22,7 +76,6 @@ db.once('open', _ => {
 db.on('error', err => {
   console.error('Connection error: ', err)
 })
-
 //define a schema
 
 const Schema = mongoose.Schema;
@@ -36,18 +89,19 @@ const userSchema = new Schema({
 //add 
 const articleSchema = new Schema({
   title: 'string',
+  
   link: 'string',
   description: 'string',
   votes: Number,
   comments: [{body: 'string', by: mongoose.Schema.Types.ObjectId}]
-})
+}, {timestamps: {createdAt: 'created_at'}})
+
 
 //compile a model
 
 //somehow connect oauth to this
 const User = mongoose.model('User', userSchema);
 const Article = mongoose.model('Article', articleSchema);
-
 
 
 //delete all
@@ -69,7 +123,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // This dataService currently contains the data.
 // You will be hooking it up to Mongo as part of your assignment.
-const dataService = new DataService();
+
+// const dataService = new DataService();
 
 
 // =========== API ROUTES ===========
