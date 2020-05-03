@@ -140,13 +140,13 @@ footer{
 	text-align:center;
 }
 
-.placeholder {
-	position: relative;
-	height: 200px;
-}
-
 .hide {
 	display: none;
+}
+
+.newsContainer {
+	margin-top: 150px;
+	margin-bottom: 150px;;
 }
 
 .newsContainer li {

@@ -9,7 +9,7 @@ const commentForm = `<form action="" class="commentForm">
 const voting = `<div class="voteContainer">
 <button class="upVote"><span class="sr-only">upvote this article</span><i class="fas fa-caret-up"></i></button> 5
 <button class="downVote"><span class="sr-only">downvote this article</span><i class="fas fa-caret-down"></i></button> 0
-</div>`
+</div>`;
 function fetchAndPrintData() {
 	fetch("/api/data/articles")
 		.then((data) => data.json())
@@ -53,7 +53,7 @@ const searchFunction = function (query) {
 					<p>posted on ${date} at ${time[0]}</p>
             <p class="description"> ${description} </p>
 			${commentForm}
-		</li>`
+		</li>`;
 					newsContainer.innerHTML += htmlToAppend;
 				}
 			});
@@ -92,7 +92,6 @@ function submitForm() {
 		},
 		body: JSON.stringify({ title, description, link }),
 	}).then(() => {
-		// console.log(JSON.stringify({ title, description, link }));
 		fetchAndPrintData();
 		postArticleForm.reset();
 	});
@@ -129,6 +128,7 @@ auth.onAuthStateChanged((user) => {
 		loginLink.closest("li").style.display = "none";
 		signupLink.closest("li").style.display = "none";
 		logoutLink.closest("li").style.display = "inline";
+		console.log(user.displayName)
 	} else {
 		logoutLink.closest("li").style.display = "none";
 		loginLink.closest("li").style.display = "inline";
@@ -174,12 +174,35 @@ signupForm.addEventListener("submit", (e) => {
 	const password = signupForm["signupPassword"].value;
 	const signupUsername = signupForm["signupUsername"].value;
 
+	//add this user to our database
+
+	fetch("/api/data/users", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ signupUsername, email }),
+	}).then(() => {
+		console.log("user added");
+	});
+
 	// sign up this user in firebase
 	auth.createUserWithEmailAndPassword(email, password).then((cred) => {
 		// if valid response, take the username
 		if (cred) {
-			cred.displayName = signupUsername;
+			const user = firebase.auth().currentUser;
+			let displayName, idToken;
+
+			user
+				.updateProfile({
+					displayName: signupUsername,
+				})
+				.then(() => {
+					// console.log(user.displayName)
+					displayName = user.displayName;
+				});
 		}
+
 		modalSignup.style.display = "none";
 		signupForm.reset();
 	});
