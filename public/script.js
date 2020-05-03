@@ -87,7 +87,6 @@ function submitForm() {
 		},
 		body: JSON.stringify({ title, description, link }),
 	}).then(() => {
-		// console.log(JSON.stringify({ title, description, link }));
 		fetchAndPrintData();
 		postArticleForm.reset();
 	});
@@ -133,6 +132,7 @@ loginLink.addEventListener("click", () => {
 	modalLogin.style.display = "block";
 	modalSignup.style.display = "none";
 });
+
 // sign up function
 signupForm.addEventListener("submit", (e) => {
 	e.preventDefault();
@@ -142,12 +142,37 @@ signupForm.addEventListener("submit", (e) => {
 	const password = signupForm["signupPassword"].value;
 	const signupUsername = signupForm["signupUsername"].value;
 
+  //add this user to our database
+
+  fetch("/api/data/users", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ signupUsername, email }),
+    }).then(() => {
+      console.log('user added')
+    })
+
+
 	// sign up this user in firebase
 	auth.createUserWithEmailAndPassword(email, password).then((cred) => {
 		// if valid response, take the username
 		if (cred) {
-			cred.displayName = signupUsername;
-		}
+      // cred.displayName = signupUsername;
+      const user = firebase.auth().currentUser;
+      let displayName, idToken;
+
+      user.updateProfile({
+        displayName: signupUsername
+      }).then(() => {
+        const user = firebase.auth().currentUser;
+        // console.log(user.displayName)
+        displayName = user.displayName;
+      })
+    }
+    
+
 		modalSignup.style.display = "none";
 		signupForm.reset();
 	});
@@ -159,7 +184,7 @@ loginForm.addEventListener("submit", (e) => {
 	const password = loginForm["loginPassword"].value;
 	auth.signInWithEmailAndPassword(email, password).then((cred) => {
 		modalLogin.style.display = "none";
-		loginForm.reset();
+    loginForm.reset();
 	});
 });
 
@@ -169,3 +194,19 @@ logoutLink.addEventListener("click", (e) => {
 		console.log("user has signed out");
 	});
 });
+
+//TODO
+//use this to post username to span
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    const user = firebase.auth().currentUser;
+    console.log(user.displayName)
+    user.getIdToken().then((idToken) => {
+      console.log(idToken)
+    }).catch(err => {
+      console.log(err)
+    })
+  } else {
+    console.log('user signed out')
+  }
+})
