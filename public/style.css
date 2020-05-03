@@ -78,7 +78,14 @@ a{
 	align-items: center;
 	justify-content: center;
 	margin-top:300px;
-	display:none
+	display:none;
+}
+
+.closeSignupModal,
+.closeLoginModal {
+	position: absolute;
+	top: 20px;
+	right: 20px;
 }
 
 /* footer covers bottom of page gotta make it so bottom is shown by being able to scroll more. */
@@ -92,18 +99,19 @@ a{
 	background: var(--darkPurp);
 	width:60%;
 	padding:75px 0;
-	font-size:20px
+	font-size:20px;
+	position: relative;
 }
 
 .postArticleForm{
 	margin-top:150px;
-	font-size:20px
+	font-size:20px;
 }
 
 h4{
 	font-size: 50px;
 	margin:0;
-	padding-bottom:20px
+	padding-bottom:20px;
 }
 
 footer{

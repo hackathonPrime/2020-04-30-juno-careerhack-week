@@ -54,7 +54,9 @@ const searchFunction = function (query) {
 		});
 };
 
+//functions in the nav bar
 
+//search function
 const searchForm = document.querySelector(".searchForm");
 searchForm.addEventListener("submit", (e) => {
 	e.preventDefault();
@@ -69,10 +71,7 @@ clearFilterButton.addEventListener("click", () => {
 	fetchAndPrintData();
 });
 
-// target for article form reset
-const postArticleForm = document.querySelector(".postArticleForm");
-
-// Submits the form and refreshes the data
+// Submits the article form and refreshes the data
 function submitForm() {
 	event.preventDefault();
 
@@ -92,27 +91,31 @@ function submitForm() {
 		postArticleForm.reset();
 	});
 }
+// article form
+const postArticleForm = document.querySelector(".postArticleForm");
 
 // run this on load
 fetchAndPrintData();
 postArticleForm.reset();
 
-//user auth
-
-//auth constants
+// user auth constants
 const signupForm = document.querySelector("#signupForm");
 const signupLink = document.querySelector("#signupLink");
 const loginForm = document.querySelector("#loginForm");
 const loginLink = document.querySelector("#loginLink");
 const logoutLink = document.querySelector("#logout");
 
-// target for form toggle
+// form constants for display purposes
 const modalSignup = document.querySelector(".modalSignup");
 const modalLogin = document.querySelector(".modalLogin");
+const closeSignupModal = document.querySelector(".closeSignupModal");
+const closeLoginModal = document.querySelector(".closeLoginModal");
+
+
 
 // listen for auth status changes
 auth.onAuthStateChanged((user) => {
-	// determine which auth links to display in the nav
+	// determine which auth nav links to display based on signed in/out
 	if (user) {
 		loginLink.closest("li").style.display = "none";
 		signupLink.closest("li").style.display = "none";
@@ -124,15 +127,27 @@ auth.onAuthStateChanged((user) => {
 	}
 });
 
-// sign up show modal
+// show sign up modal
 signupLink.addEventListener("click", () => {
 	modalSignup.style.display = "block";
 	modalLogin.style.display = "none";
 });
+// show login modal
 loginLink.addEventListener("click", () => {
 	modalLogin.style.display = "block";
 	modalSignup.style.display = "none";
 });
+
+// close auth modals
+closeSignupModal.addEventListener('click',()=>{
+	modalSignup.style.display = 'none';
+})
+
+closeLoginModal.addEventListener('click',()=>{
+	modalLogin.style.display = 'none';
+})
+
+
 // sign up function
 signupForm.addEventListener("submit", (e) => {
 	e.preventDefault();
@@ -153,6 +168,7 @@ signupForm.addEventListener("submit", (e) => {
 	});
 });
 
+// login function
 loginForm.addEventListener("submit", (e) => {
 	e.preventDefault();
 	const email = loginForm["loginEmail"].value;
@@ -162,7 +178,7 @@ loginForm.addEventListener("submit", (e) => {
 		loginForm.reset();
 	});
 });
-
+// logout function
 logoutLink.addEventListener("click", (e) => {
 	e.preventDefault();
 	auth.signOut().then(() => {
