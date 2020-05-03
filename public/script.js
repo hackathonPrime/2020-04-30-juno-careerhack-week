@@ -3,8 +3,8 @@ function fetchAndPrintData() {
 	fetch("/api/data")
 		.then((data) => data.json())
 		.then((json) => {
-      console.log(json)
-			// document.getElementById("out").textContent = JSON.stringify(json);
+      // console.log(json)
+			document.getElementById("out").textContent = JSON.stringify(json);
 		});
 }
 
@@ -12,20 +12,24 @@ function fetchAndPrintData() {
 function submitForm() {
 	event.preventDefault();
 
-	const title = event.target.title.value;
-	const description = event.target.description.value;
+  const title = event.target.title.value;
+  const description = event.target.description.value;
+  const link = event.target.link.value;
 
-	fetch("/api/data", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ title, description }),
-	}).then(() => {
-		console.log(JSON.stringify({ title, description }));
-		fetchAndPrintData();
-	});
+  fetch('/api/data/articles', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ title, description, link })
+  })
+  .then(() => {
+    console.log(JSON.stringify({ title, description, link }))
+    fetchAndPrintData()
+  });
+  
 }
+  
 
 // run this on load
 fetchAndPrintData();

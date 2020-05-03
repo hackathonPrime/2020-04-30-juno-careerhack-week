@@ -90,26 +90,30 @@
         <p>Copyright &#169; 2020 <span><a href="http://celesteellerby.com/">Celeste</a></span> | <span><a href="https://nickreyno.com/">Nick</a></span> | <span> <a href="http://www.opjot.com">Opjot</a></span></p>
       </footer>
 
-      <div id="out"> </div>
-      <form onsubmit="submitForm()" id="submit-form" action="/api/data" method="POST">
-        <p>
-          <label for="title">
-            Title
-            <input name="title" />
-          </label>
-        </p>
-        <p>
-          <label for="description">
-            Description
-            <input name="description" type="text" />
-          </label>
-        </p>
-        <p>
-          <input type="submit"></input>
-        </p>
-      </form>
-    </div>
-    
+  <div id="out"></div>
+  <form onsubmit="submitForm()" id="submit-form" action="/api/data/articles" method="POST">
+    <p>
+      <label for="title">
+        Title:
+        <input name="title" required/>
+      </label>
+    </p>
+    <p>
+      <label for="link">
+        Link:
+        <input name="link" type="text" required/>
+      </label>
+    </p>
+    <p>
+      <label for="description">
+        Description:
+        <input name="description" type="text" />
+      </label>
+    </p>
+    <p>
+      <input type="submit"></input>
+    </p>
+  </form>
       <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
