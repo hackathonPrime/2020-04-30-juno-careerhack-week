@@ -133,6 +133,24 @@ loginLink.addEventListener("click", () => {
 	modalSignup.style.display = "none";
 });
 
+//send user data to mongodb
+const sendUser = (displayName) => {
+    fetch("/api/data/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ displayName }),
+  }).then(() => {
+    console.log('user added')
+  })
+}
+
+
+
+
+
+
 // sign up function
 signupForm.addEventListener("submit", (e) => {
 	e.preventDefault();
@@ -141,19 +159,6 @@ signupForm.addEventListener("submit", (e) => {
 	const email = signupForm["signupEmail"].value;
 	const password = signupForm["signupPassword"].value;
 	const signupUsername = signupForm["signupUsername"].value;
-
-  //add this user to our database
-
-  fetch("/api/data/users", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ signupUsername, email }),
-    }).then(() => {
-      console.log('user added')
-    })
-
 
 	// sign up this user in firebase
 	auth.createUserWithEmailAndPassword(email, password).then((cred) => {
