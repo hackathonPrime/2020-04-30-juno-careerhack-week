@@ -4,8 +4,14 @@ function fetchAndPrintData() {
 		.then((data) => data.json())
 		.then((json) => {
 			json.forEach((article) => {
-				const { title, description, link } = article;
+        console.log(article)
+        const { created_at, description, link, title } = article;
+        const utcDate = created_at;
+        const localDate = new Date(utcDate);
+        const date = localDate.toDateString()
+        const time = localDate.toTimeString().split("-");
         const htmlToAppend = ` <li class="article">
+        <p>posted on ${date} at ${time[0]}</p>
             <h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
             <p class="description"> ${description} </p>
           </li>`;
