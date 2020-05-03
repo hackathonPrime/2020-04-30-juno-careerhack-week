@@ -1,10 +1,15 @@
 // display all articles
 const newsContainer = document.querySelector(".newsContainer");
-const commentForm = `<form action="" class="commentForm">
+const addCommentForm = function(id){
+const form = `<form action="" class="commentForm">
+<input type="text" name="articleID" value="${id}" disabled="true">
 <label for="comment">enter comment below</label>
 <input type="textarea" name="comment">
 <input type="submit">
-</form>`;
+</form>`
+console.log(id)
+return form
+}
 
 const voting = `<div class="voteContainer">
 <button class="upVote"><span class="sr-only">upvote this article</span><i class="fas fa-caret-up"></i></button> 5
@@ -27,7 +32,7 @@ function fetchAndPrintData() {
 				<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
 				<p>posted on ${date} at ${time[0]}</p>
 		<p class="description"> ${description} </p>
-		${commentForm}
+		${addCommentForm(_id)}
 	</li>`;
 				newsContainer.innerHTML += htmlToAppend;
 			});
@@ -117,6 +122,7 @@ const postArticleLink = document.querySelector("#postArticleLink");
 const loginLink = document.querySelector("#loginLink");
 const signupLink = document.querySelector("#signupLink");
 const logoutLink = document.querySelector("#logout");
+const welcomeMessage = document.querySelector('.welcomeMessage')
 
 // form constants for display purposes
 const modalSignup = document.querySelector(".modalSignup");
@@ -138,11 +144,13 @@ auth.onAuthStateChanged((user) => {
 		loginLink.closest("li").style.display = "none";
 		signupLink.closest("li").style.display = "none";
 		logoutLink.closest("li").style.display = "inline";
-		console.log(user.displayName)
+		welcomeMessage.closest('li').style.display = "inline"
+		welcomeMessage.innerHTML = `Welcome, ${user.displayName}`
 	} else {
 		logoutLink.closest("li").style.display = "none";
 		loginLink.closest("li").style.display = "inline";
 		signupLink.closest("li").style.display = "inline";
+		welcomeMessage.closest('li').style.display = "none"
 	}
 });
 
