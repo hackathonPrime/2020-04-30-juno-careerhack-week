@@ -9,130 +9,131 @@
   <!-- <script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth__en.js"></script>
 <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css" /> -->
 </head>
-
-<body>
   <body>
     <header>
-        <div>
-            <img src="" alt="LOGO">
-            <h1>Prime News</h1>
+      <section class="headerContainer">
+        <div class="title">
+          <img src="" alt="LOGO">
+          <h1>Prime News</h1>
         </div>
+        <nav class="navbar">
+          <ul class="nav">
+            <li class="loggedIn">
+              <a href="#" class="" data-target="modal-account">Account</a>
+            </li>
+            <li class="loggedIn">
+              <a href="#" class="" id="logout">Logout</a>
+            </li>
+            <li class="loggedIn">
+              <a href="#" class="" data-target="modal-create">Create Guide</a>
+            </li>
+            <li class="loggedOut">
+              <a id="loginLink" href="#" class="" data-target="modal-login">Login</a>
+            </li>
+            <li class="loggedOut">
+              <a id="signupLink" href="#" class="" data-target="modal-signup">Sign up</a>
+            </li>
+          </ul>
+        </nav>
+      </section>  
     </header>
-    <Main>
-      <nav>
-        <ul class="">
-          <li class="loggedIn">
-            <a href="#" class="" data-target="modal-account">Account</a>
-          </li>
-          <li class="loggedIn">
-            <a href="#" class="" id="logout">Logout</a>
-          </li>
-          <li class="loggedIn">
-            <a href="#" class="" data-target="modal-create">Create Guide</a>
-          </li>
-          <li class="loggedOut">
-            <a id="loginLink" href="#" class="" data-target="modal-login">Login</a>
-          </li>
-          <li class="loggedOut">
-            <a id="signupLink" href="#" class="" data-target="modal-signup">Sign up</a>
-          </li>
-      </ul>
-    </nav>
-
-      <div id="modalSignup" class="modalSignup">
-        <div class="modalContent">
-          <h4>Sign up</h4>
-          <form id="signupForm">
-            <div class="inputField">
-              <input type="email" id="signupEmail" required />
-              <label for="signupEmail">Email address</label>
-            </div>
-            <div class="input-field">
-              <input type="password" id="signupPassword" required />
-              <label for="signupPassword">Choose password</label>
-            </div>
-            <button class="">Sign up</button>
-          </form>
+    <div class="wrapper">
+      <Main>
+        <div id="modalSignup" class="modalSignup">
+          <div class="modalContent">
+            <h4>Sign-Up</h4>
+            <form id="signupForm">
+              <div class="inputField">
+                <input type="email" placeholder="Email Address" id="signupEmail" required />
+                <label for="signupEmail">Email Address</label>
+              </div>
+              <div class="input-field">
+                <input type="password" placeholder="Password" id="signupPassword" required />
+                <label for="signupPassword">Choose Password</label>
+              </div>
+              <button class="">Sign-Up</button>
+            </form>
+          </div>
         </div>
-      </div>
-
-      <div id="modalLogin" class="modalLogin">
-        <div class="modalContent">
-          <h4>Login</h4><br />
-          <form id="loginForm">
-            <div class="inputField">
-              <input type="email" id="loginEmail" required />
-              <label for="loginEmail">Email address</label>
-            </div>
-            <div class="inputField">
-              <input type="password" id="loginPassword" required />
-              <label for="loginPassword">Your password</label>
-            </div>
-            <button class="">Login</button>
-          </form>
+        
+        <div id="modalLogin" class="modalLogin">
+          <div class="modalContent">
+            <h4>Login</h4><br />
+            <form id="loginForm">
+              <div class="inputField">
+                <input type="email" placeholder="Email Address" id="loginEmail" required />
+                <label for="loginEmail">Email Address</label>
+              </div>
+              <div class="inputField">
+                <input type="password" placeholder="Password" id="loginPassword" required />
+                <label for="loginPassword">Your Password</label>
+              </div>
+              <button class="">Login</button>
+            </form>
+          </div>
         </div>
-      </div>
 
-      <div>
-        <ul class="newsContainer">
-          <li class="article">
-            <h2 class="newsTitle"> </h2>
-            <p class="description"> </p>
-            <p class="newsLink"></p>
-          </li>
-        </ul>
-      </div>
-    </Main>
-    <footer> 
-      <p>Copyright &#169; 2020 <span><a href="http://celesteellerby.com/">Celeste</a></span> | <span><a href="https://nickreyno.com/">Nick</a></span> | <span> <a href="http://www.opjot.com">Opjot</a></span></p>
-    </footer>
+        <div>
+          <ul class="newsContainer">
+            <li class="article">
+              <h2 class="newsTitle"> </h2>
+              <p class="description"> </p>
+              <p class="newsLink"></p>
+            </li>
+          </ul>
+        </div>
+      </Main>
+      <footer> 
+        <p>Copyright &#169; 2020 <span><a href="http://celesteellerby.com/">Celeste</a></span> | <span><a href="https://nickreyno.com/">Nick</a></span> | <span> <a href="http://www.opjot.com">Opjot</a></span></p>
+      </footer>
 
-
-  <div id="out"></div>
-  <form onsubmit="submitForm()" id="submit-form" action="/api/data" method="POST">
-    <p>
-      <label for="title">
-        Title
-        <input name="title" />
-      </label>
-    </p>
-    <p>
-      <label for="description">
-        Description
-        <input name="description" type="text" />
-      </label>
-    </p>
-    <p>
-      <input type="submit"></input>
-    </p>
-  </form>
+      <div id="out"> </div>
+      <form onsubmit="submitForm()" id="submit-form" action="/api/data" method="POST">
+        <p>
+          <label for="title">
+            Title
+            <input name="title" />
+          </label>
+        </p>
+        <p>
+          <label for="description">
+            Description
+            <input name="description" type="text" />
+          </label>
+        </p>
+        <p>
+          <input type="submit"></input>
+        </p>
+      </form>
+    </div>
+    
       <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
 
-  <script>
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyDXdeuuCdUEDBlqULEHmLMrsx5cUH-ilG4",
-    authDomain: "hackathonprime.firebaseapp.com",
-    databaseURL: "https://hackathonprime.firebaseio.com",
-    projectId: "hackathonprime",
-    storageBucket: "hackathonprime.appspot.com",
-    messagingSenderId: "532470840059",
-    appId: "1:532470840059:web:30257cf3a329407cab4e5e"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+    <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDXdeuuCdUEDBlqULEHmLMrsx5cUH-ilG4",
+      authDomain: "hackathonprime.firebaseapp.com",
+      databaseURL: "https://hackathonprime.firebaseio.com",
+      projectId: "hackathonprime",
+      storageBucket: "hackathonprime.appspot.com",
+      messagingSenderId: "532470840059",
+      appId: "1:532470840059:web:30257cf3a329407cab4e5e"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
 
-    // make auth and firestore refs
-    // make auth and firestore refs
-  const auth = firebase.auth();
-  const db = firebase.firestore();
+      // make auth and firestore refs
+      // make auth and firestore refs
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
-  </script>
-  <script src="script.js"></script>
+    </script>
+    <script src="script.js"></script>
 
-</body>
+  </body>
 
 </html>
