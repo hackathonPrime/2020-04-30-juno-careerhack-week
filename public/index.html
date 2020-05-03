@@ -38,7 +38,7 @@
       </section>  
     </header>
     <div class="wrapper">
-      <Main>
+      <Main class="">
         <div id="modalSignup" class="modalSignup">
           <div class="modalContent">
             <h4>Sign-Up</h4>
@@ -73,39 +73,37 @@
           </div>
         </div>
 
-        <div>
+        <!-- <div>
           <ul class="newsContainer">
             <li class="article">
-              <h2 class="newsTitle"> </h2>
-              <p class="description"> </p>
+              <h2 class="newsTitle"></h2>
+              <p class="description"></p>
               <p class="newsLink"></p>
             </li>
           </ul>
+        </div> -->
+        <div class="submissionForm">
+          <form onsubmit="submitForm()" id="submit-form" action="/api/data" method="POST">
+            <p>
+              <label for="title">
+                Title
+              <input name="title" />
+              </label>
+            </p>
+            <p>
+              <label for="description">
+                Description
+                <input name="description">
+              </label>
+            </p>  
+          </form>
+          <div id="out"> </div>
         </div>
       </Main>
-      <footer> 
-        <p>Copyright &#169; 2020 <span><a href="http://celesteellerby.com/">Celeste</a></span> | <span><a href="https://nickreyno.com/">Nick</a></span> | <span> <a href="http://www.opjot.com">Opjot</a></span></p>
-      </footer>
-
-      <div id="out"> </div>
-      <form onsubmit="submitForm()" id="submit-form" action="/api/data" method="POST">
-        <p>
-          <label for="title">
-            Title
-            <input name="title" />
-          </label>
-        </p>
-        <p>
-          <label for="description">
-            Description
-            <input name="description" type="text" />
-          </label>
-        </p>
-        <p>
-          <input type="submit"></input>
-        </p>
-      </form>
     </div>
+    <footer> 
+      <p>Copyright &#169; 2020 <span><a href="http://celesteellerby.com/">Celeste</a></span> | <span><a href="https://nickreyno.com/">Nick</a></span> | <span> <a href="http://www.opjot.com">Opjot</a></span></p>
+    </footer>
     
       <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
