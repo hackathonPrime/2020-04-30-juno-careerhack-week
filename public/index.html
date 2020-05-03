@@ -12,17 +12,19 @@
   <body>
     <header>
       <section class="headerContainer">
+        <img src="" alt="LOGO">
         <div class="title">
-          <img src="" alt="LOGO">
           <h1>Prime News</h1>
+          <form action="#" class="searchForm">
+            <div>
+              <input type="text" name="search" id="search" placeholder="Filter Articles">
+              <label for="search">Filter Articles</label>
+            </div>
+            <input class="searchButton" type="submit">
+            <button class="clearFilter searchButton">clear filter</button>
+          </form>
         </div>
         <nav class="navbar">
-          <form action="#" class="searchForm">
-            <input type="text" name="search" id="search">
-            <label for="search">filter articles</label>
-            <input type="submit">
-            <button class="clearFilter">clear filter</button>
-          </form>
           <ul class="nav">
             <li class="loggedIn">
               <a href="#" class="" data-target="modal-account">Account</a>
@@ -87,7 +89,7 @@
         </div>
       </Main>
       <footer> 
-        <p>Copyright &#169; 2020 <span><a href="http://celesteellerby.com/">Celeste</a></span> | <span><a href="https://nickreyno.com/">Nick</a></span> | <span> <a href="http://www.opjot.com">Opjot</a></span></p>
+        <p>Copyright &#169; 2020 <span><a href="http://celesteellerby.com/">Celeste</a></span> | <span><a href="https://nickreyno.com/">Nick</a></span> | <span><a href="http://www.opjot.com">Opjot</a></span></p>
       </footer>
 
   <div id="out"></div>

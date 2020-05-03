@@ -38,22 +38,31 @@ header{
 	z-index: 2;
 }
 
-.headerContainer, .title, .nav{
+.headerContainer, .nav, .title form{
 	display:flex;
 	flex-direction:row;
 }
 
 .title{
-	width:25%;
-	margin-left:50px
+	display:flex;
+	flex-direction:column;
+	width:60%;
+	margin-left:50px;
+}
+
+.searchButton{
+	height:50%;
+	width: fit-content;
+	margin-left:20px;
 }
 
 .navbar{
-	width:75%
+	width:40%;
 }
 
 .nav{
 	justify-content: right;
+	align-items: baseline;
 	margin-right:50px;
 }
 
@@ -64,12 +73,12 @@ li{
 
 a{
 	text-decoration: none;
-	color:inherit
+	color:inherit;
 }
 
 .wrapper{
 	margin:0 50px;
-	max-width:1300px
+	max-width:1300px;
 }
 
 .modalSignup, .modalLogin{
@@ -78,7 +87,7 @@ a{
 	align-items: center;
 	justify-content: center;
 	margin-top:300px;
-	display:none
+	display:none;
 }
 
 /* footer covers bottom of page gotta make it so bottom is shown by being able to scroll more. */
@@ -92,18 +101,18 @@ a{
 	background: var(--darkPurp);
 	width:60%;
 	padding:75px 0;
-	font-size:20px
+	font-size:20px;
 }
 
 .postArticleForm{
 	margin-top:150px;
-	font-size:20px
+	font-size:20px;
 }
 
 h4{
 	font-size: 50px;
 	margin:0;
-	padding-bottom:20px
+	padding-bottom:20px;
 }
 
 footer{
@@ -111,7 +120,7 @@ footer{
 	bottom:0;
 	background: var(--notBlue);
 	width:100%;
-	text-align:center
+	text-align:center;
 }
 
 .placeholder {
