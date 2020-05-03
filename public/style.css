@@ -10,7 +10,14 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 .visuallyHidden:not(:focus):not(:active) { position: absolute; width: 1px; height: 1px; margin: -1px;border: 0;padding: 0;white-space: nowrap;clip-path: inset(100%);clip: rect(00 0 0);overflow: hidden;}
 
 :root{
-	--bg-color:beige
+	--raisinBlack: #211A1D;
+	--darkPurp: #6320EE;
+	--notBlue: #8075FF;
+	--magnolio: #F8F0FB;
+	--salsaRed: #E54B4B;
+	--seaGreen: #45BB7F;
+	--champagnePink: #EDD3C4
+
 }
 
 
@@ -25,7 +32,7 @@ label {
 
 header{
 	width:100%;
-	background: var(--bg-color);
+	background: var(--notBlue);
 	position:fixed;
 	top:0;
 	z-index: 2;
@@ -67,26 +74,48 @@ a{
 
 .modalSignup, .modalLogin{
 	width: 100%;
-	height: 100vh;	
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	margin-top:300px;
 	display:none
 }
 
-.modalSignup{
-	margin-top:115px
-}
+/* footer covers bottom of page gotta make it so bottom is shown by being able to scroll more. */
+
 
 .modalContent{
 	display:flex;
 	flex-direction:column;
 	align-items: center;
 	text-align: center;
-	
+	background: var(--darkPurp);
+	width:60%;
+	padding:75px 0;
+	font-size:20px
 }
 
+.postArticleForm{
+	margin-top:150px;
+	font-size:20px
+}
 
+h4{
+	font-size: 50px;
+	margin:0;
+	padding-bottom:20px
+}
 
+footer{
+	position:fixed;
+	bottom:0;
+	background: var(--notBlue);
+	width:100%;
+	text-align:center
+}
 
 .placeholder {
 	position: relative;
 	height: 200px;
 }
+
