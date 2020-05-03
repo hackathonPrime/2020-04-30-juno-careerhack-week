@@ -2,7 +2,7 @@
 const newsContainer = document.querySelector(".newsContainer");
 const addCommentForm = function(id){
 const form = `<form action="" class="commentForm">
-<input type="text" name="articleID" value="${id}" disabled="true">
+<input class="articleID" aria-hidden="true" type="text" name="articleID" value="${id}" disabled="true">
 <label for="comment">enter comment below</label>
 <input type="textarea" name="comment">
 <input type="submit">
@@ -30,7 +30,7 @@ function fetchAndPrintData() {
 				const htmlToAppend = ` <li class="article ${_id}">
 				${voting}
 				<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
-				<p>posted on ${date} at ${time[0]}</p>
+				<p class="timePosted">posted ${date} ${time[0]}</p>
 		<p class="description"> ${description} </p>
 		${addCommentForm(_id)}
 	</li>`;
@@ -55,7 +55,7 @@ const searchFunction = function (query) {
 					const time = localDate.toTimeString().split("-");
 					const htmlToAppend = ` <li class="article">
 					<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
-					<p>posted on ${date} at ${time[0]}</p>
+					<p class="timePosted"	>posted ${date} ${time[0]}</p>
             <p class="description"> ${description} </p>
 			${commentForm}
 		</li>`;
@@ -97,8 +97,10 @@ function submitForm() {
 		},
 		body: JSON.stringify({ title, description, link }),
 	}).then(() => {
+		newsContainer.innerHTML = '';
 		fetchAndPrintData();
 		postArticleForm.reset();
+
 	});
 }
 // article form
