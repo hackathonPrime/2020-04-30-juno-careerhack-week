@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hackathon News</title>
   <link rel="stylesheet" href="style.css">
-  <!-- <script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth__en.js"></script>
-<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css" /> -->
+  <script src="https://kit.fontawesome.com/8ffef1b7fa.js" crossorigin="anonymous"></script>
 </head>
   <body>
     <header>
@@ -26,6 +25,9 @@
         </div>
         <nav class="navbar">
           <ul class="nav">
+            <li class="loggedIn">
+              <p>Welcome, <span id="user"></span></p>
+            </li>
             <li class="postArticle">
               <a href="#" id="postArticleLink">Post Article</a>
             </li>
@@ -44,17 +46,14 @@
     </header>
     <div class="wrapper">
       <Main>
-        <div class="placeholder">
-            
-        </div>
         <div id="modalSignup" class="modalSignup">
           <div class="modalContent">
             <button class="closeSignupModal"><span class="sr-only">close form</span>X</button>
             <h4>Sign-Up</h4>
             <form id="signupForm">
               <div class="inputField">
-                <input type="text" placeholder="username" name="signupUsername" id="signupUsername" required>
-                <label for="signupUsername">username</label>
+                <input type="text" placeholder="Username" name="signupUsername" id="signupUsername" required>
+                <label for="signupUsername">Username</label>
                 <input type="email" placeholder="Email Address" id="signupEmail" required />
                 <label for="signupEmail">Email Address</label>
               </div>
@@ -62,7 +61,7 @@
                 <input type="password" placeholder="Password" id="signupPassword" required />
                 <label for="signupPassword">Choose Password</label>
               </div>
-              <button class="">Sign-Up</button>
+              <button class="formButton">Sign-Up</button>
             </form>
           </div>
         </div>
@@ -80,7 +79,7 @@
                 <input type="password" placeholder="Password" id="loginPassword" required />
                 <label for="loginPassword">Your Password</label>
               </div>
-              <button class="">Login</button>
+              <button class="formButton">Login</button>
             </form>
           </div>
         </div>
@@ -90,27 +89,13 @@
             <button class="closeArticleModal"><span class="sr-only">close form</span>X</button>
             <h4>Publish an Article</h4>
             <form onsubmit="submitForm()" class="postArticleForm" id="submit-form" action="/api/data/articles" method="POST">
-              <p>
-                <label for="title">
-                  Title:
-                  <input name="title" required/>
-                </label>
-              </p>
-              <p>
-                <label for="link">
-                  Link:
-                  <input name="link" type="text" required/>
-                </label>
-              </p>
-              <p>
-                <label for="description">
-                  Description:
-                  <input name="description" type="text" />
-                </label>
-              </p>
-              <p>
-                <input type="submit"></input>
-              </p>
+                <label class="sr-only" for="title">Title:</label>
+                  <input name="title" placeholder="Title" required/>
+                <label class="sr-only" for="link"> Link:</label>
+                  <input name="link" placeholder="URL Link" type="text" required/>
+                <label class="sr-only" for="description"> Description:</label>
+                  <input name="description"  placeholder="Description" type="text" />
+                <input class="formButton" type="submit"></input>
             </form>
           </div>
         </div>
@@ -120,9 +105,10 @@
           </ul>
         </div>
       </Main>
-    </div>  
+      </div>
       <footer> 
         <p>Copyright &#169; 2020 <span><a href="http://celesteellerby.com/">Celeste</a></span> | <span><a href="https://nickreyno.com/">Nick</a></span> | <span><a href="http://www.opjot.com">Opjot</a></span></p>
+        
       </footer>
       <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
@@ -144,13 +130,11 @@
     firebase.initializeApp(firebaseConfig);
 
       // make auth and firestore refs
-      // make auth and firestore refs
     const auth = firebase.auth();
     const db = firebase.firestore();
 
     </script>
     <script src="script.js"></script>
-
   </body>
 
 </html>

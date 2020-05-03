@@ -14,10 +14,18 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 	--primaryMed: #6320EE;
 	--primaryLight: #8075FF;
 	--secondary: #F8F0FB;
-	--tertiary: #EDD3C4
+	--tertiary: #EDD3C4;
 	--accent1: #E54B4B;
 	--accent2: #45BB7F;
+	--writingSize: 1.75rem;
+}
 
+html {
+	font-size: 62.5%;
+}
+
+body {
+	background: var(--secondary);
 }
 
 .hidden {
@@ -31,6 +39,7 @@ label {
 
 body{
 	background: var(--secondary);
+	font-size: var(--writingSize);
 }
 
 header{
@@ -67,6 +76,7 @@ header{
 	justify-content: right;
 	align-items: baseline;
 	margin-right:50px;
+	height:100%;
 }
 
 li{
@@ -80,25 +90,30 @@ a{
 }
 
 .wrapper{
-	margin:0 50px;
-	max-width:1300px;
+	margin:0 5rem;
+	max-width:130rem;
 }
 
 .modalSignup, .modalLogin,
 .modalArticle{
-	width: 100%;
-	/* display:flex; */
-	/* align-items: center; */
-	/* justify-content: center; */
+	width: 60%;
 	display:none;
+	position:fixed;
+	top:25%;
+	left:20%;
+	z-index: 1;
 }
 
 .closeSignupModal,
 .closeLoginModal,
 .closeArticleModal {
 	position: absolute;
-	top: 20px;
-	right: 20px;
+	top: 2rem;
+	right: 2rem;
+	border-radius:100%;
+	border:0.2rem solid var(--primaryDark);
+	background:var(--secondary);
+	padding:0.5rem 1rem 0.2rem;
 }
 
 /* footer covers bottom of page gotta make it so bottom is shown by being able to scroll more. */
@@ -109,15 +124,14 @@ a{
 	align-items: center;
 	text-align: center;
 	background: var(--primaryMed);
-	width:60%;
 	padding:75px 0;
-	font-size:20px;
+	font-size:var(--writingSize);
 	position: relative;
 }
 
 .postArticleForm{
-	margin-top:150px;
-	font-size:20px;
+	font-size:var(--writingSize);
+	text-align:center
 }
 
 h4{
@@ -132,19 +146,56 @@ footer{
 	background: var(--primaryLight);
 	width:100%;
 	text-align:center;
-}
-
-.placeholder {
-	position: relative;
-	height: 200px;
+	z-index:10;
 }
 
 .hide {
 	display: none;
 }
 
+.newsContainer {
+	margin-top: 150px;
+	margin-bottom: 150px;;
+}
+
 .newsContainer li {
+	position: relative;
 	margin: 20px auto;
 	width: 80%;
 	max-width: 800px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	background: #FAFAFA;
+	border-radius: 5px;
+	border: 2px solid var(--primaryLight);
+}
+
+.newsContainer h2 {
+	margin: 10px;
+}
+
+.voteContainer {
+	position: relative;
+	padding: 10px;
+	display: flex;
+	align-items: center;
+}
+
+.formButton{
+	padding:0.5rem 1rem
+}
+
+.upVote,
+.downVote {
+	background:none;
+	border:none;
+	font-size: 2rem;
+}
+
+.upVote {
+	color: var(--accent2);
+}
+.downVote {
+	color: var(--accent1);
 }
