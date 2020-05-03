@@ -3,7 +3,8 @@ function fetchAndPrintData() {
 	fetch("/api/data")
 		.then((data) => data.json())
 		.then((json) => {
-			document.getElementById("out").textContent = JSON.stringify(json);
+      console.log(json)
+			// document.getElementById("out").textContent = JSON.stringify(json);
 		});
 }
 
@@ -31,19 +32,25 @@ fetchAndPrintData();
 
 //user auth
 
-//signup
+//user auth variables
 const signupForm = document.querySelector("#signupForm");
 const signupLink = document.querySelector("#signupLink");
 const loginForm = document.querySelector("#loginForm");
 const loginLink = document.querySelector("#loginLink");
 const logoutLink = document.querySelector("#logout");
 
+// to toggle modal visibility
+const signupFormVisible = document.querySelector('.modalSignup');
+const loginFormVisible = document.querySelector('.modalLogin');
+
 // sign up show modal
 signupLink.addEventListener("click", () => {
-	signupForm.style.display = "block";
+  signupFormVisible.style.display = "block";
+  loginFormVisible.style.display = "none";
 });
 loginLink.addEventListener("click", () => {
-	loginForm.style.display = "block";
+  loginFormVisible.style.display = "block";
+  signupFormVisible.style.display = "none";
 });
 // sign up function
 signupForm.addEventListener("submit", (e) => {
@@ -56,8 +63,8 @@ signupForm.addEventListener("submit", (e) => {
 	// sign up this user in firebase
 	auth.createUserWithEmailAndPassword(email, password).then((cred) => {
 		const modal = document.querySelector("#modalSignup");
-		signupForm.style.display = "none";
 		signupForm.reset();
+		signupFormVisible.style.display = "none";
 	});
 });
 
@@ -67,8 +74,8 @@ loginForm.addEventListener("submit", (e) => {
   const password = loginForm['loginPassword'].value;
   auth.signInWithEmailAndPassword(email, password).then((cred)=>{
 console.log(cred.user, 'user has logged in');
-loginForm.style.display = "none";
 loginForm.reset();
+loginFormVisible.style.display = "none";
   })
 });
 

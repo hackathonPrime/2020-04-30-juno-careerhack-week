@@ -67,7 +67,7 @@ a{
 .modalSignup, .modalLogin{
 	width: 100%;
 	height: 100vh;	
-	/* display:none */
+	display:none
 }
 
 .modalSignup{
@@ -80,4 +80,12 @@ a{
 	align-items: center;
 	text-align: center;
 	
+}
+
+
+
+
+.placeholder {
+	position: relative;
+	height: 200px;
 }
