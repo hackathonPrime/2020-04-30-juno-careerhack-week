@@ -25,12 +25,12 @@ function fetchAndPrintData() {
 				const { _id, created_at, description, link, title } = article;
 				const utcDate = created_at;
 				const localDate = new Date(utcDate);
-				const date = localDate.toDateString();
-				const time = localDate.toTimeString().split("-");
+				const date = localDate.toDateString().split(" ").slice(1, 4).join(" ");
+				console.log(date)
 				const htmlToAppend = ` <li class="article ${_id}">
 				${voting}
 				<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
-				<p class="timePosted">posted ${date} ${time[0]}</p>
+				<p class="timePosted">${date}</p>
 		<p class="description"> ${description} </p>
 		${addCommentForm(_id)}
 	</li>`;

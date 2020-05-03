@@ -154,16 +154,15 @@ footer{
 }
 
 .newsContainer {
-	margin-top: 150px;
-	margin-bottom: 150px;;
+	margin: 150px auto;
+	width: 80%;
 }
 
 .newsContainer li {
 	position: relative;
-	margin: 20px auto;
 	padding: 10px;
-	width: 80%;
-	max-width: 800px;
+	width: 100%;
+	margin: 20px 0;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -176,9 +175,11 @@ footer{
 	position: absolute;
 	top: 10px;
 	right: 10px;
+	width: 100px;
+	margin:10px;
 }
 .description {
-	margin: 0;
+	margin: 0 0 0 82px;
 	width: 100%;
 	font-size: 1.6rem;
 }
@@ -186,6 +187,7 @@ footer{
 .newsContainer h2 {
 	font-size: 2rem;
 	margin: 10px;
+	width: calc(100% - 202px);
 }
 
 .voteContainer {
@@ -193,6 +195,7 @@ footer{
 	display: flex;
 	align-items: center;
 	font-size: 1.5rem;
+	width: 72px;
 }
 
 .formButton{
@@ -215,4 +218,8 @@ footer{
 
 .articleID {
 	visibility: hidden;
+}
+
+.commentForm {
+	margin: 0 0 0 82px;
 }
