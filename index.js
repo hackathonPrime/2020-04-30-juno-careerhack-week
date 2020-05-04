@@ -80,10 +80,6 @@ db.on('error', err => {
 
 const Schema = mongoose.Schema;
 
-// const userSchema = new Schema({
-//   signupUsername: 'string',
-//   email: 'string',
-// });
 
 const commentSchema = new Schema({
   comment: 'string', 
@@ -172,6 +168,14 @@ app.get('/api/data/comments', async (req, res) => {
     res.send(err)
   }
 })
+
+app.get('/api/data/article/:id'), async (req, res) => {
+  try {
+    const result = await Comment.findById(req.para)
+  } catch (err) {
+    res.send(err)
+  }
+}
 
 // Save a data object
 // POST /api/data

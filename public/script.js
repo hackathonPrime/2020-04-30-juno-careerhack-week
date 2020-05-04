@@ -6,9 +6,7 @@ const form = `<form action="" class="commentForm">
 <label for="comment">enter comment below</label>
 <input type="textarea" name="comment">
 <input type="submit">
-<div id="commentOut"></div>
 </form>`
-let commentForm;
 console.log(id)
 return form
 }
@@ -36,49 +34,11 @@ function fetchAndPrintData() {
 		<p class="description"> ${description} </p>
 		${addCommentForm(_id)}
 	</li>`;
-        newsContainer.innerHTML += htmlToAppend;        
-        commentForm = document.getElementsByClassName(".commentForm");
-      })
-      document.body.addEventListener('submit', function(e) {
-        e.preventDefault();
-        if (e.target.className === 'commentForm') {
-          const articleID = e.target.articleID.value;
-          const comment = e.target.comment.value;
-          const username = userObject.username;
-          const email = userObject.email;
-          console.log(articleID, comment, username, email)
-          fetch("/api/data/comments", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ comment, username, email, articleID }),
-          }).then((res, err) => {
-            if (res, err) console.log(err);
-            console.log(res)
-            fetchAndPrintComments();
-          })
-        }
-      }, false);
-		});
+				newsContainer.innerHTML += htmlToAppend;
+			});
+    });
+    
 }
-
-function fetchAndPrintComments() {
-  fetch('api/data/comments')
-  .then((data) => data.json())
-  .then((json) => {
-    console.log(json)
-  })
-}
-
-
-
-
-
-
-
-
-
 
 // display articles according to search filter
 const searchFunction = function (query) {
@@ -140,7 +100,8 @@ function submitForm() {
 	}).then(() => {
 		fetchAndPrintData();
 		postArticleForm.reset();
-	});
+  });
+  
 }
 // article form
 const postArticleForm = document.querySelector(".postArticleForm");
@@ -168,15 +129,10 @@ const closeSignupModal = document.querySelector(".closeSignupModal");
 const closeLoginModal = document.querySelector(".closeLoginModal");
 const closeArticleModal = document.querySelector(".closeArticleModal");
 
-
-const userObject = {}
 // listen for auth status changes
 auth.onAuthStateChanged((user) => {
-
 	// determine which auth nav links to display based on signed in/out
 	if (user) {
-    userObject.username = user.displayName;
-    userObject.email = user.email;
 		loginLink.closest("li").style.display = "none";
 		signupLink.closest("li").style.display = "none";
 		logoutLink.closest("li").style.display = "inline";
@@ -201,7 +157,6 @@ loginLink.addEventListener("click", () => {
 	modalSignup.style.display = "none";
 });
 
-
 // show post article modal
 postArticleLink.addEventListener("click", () => {
 	modalArticle.style.display = "block";
@@ -220,19 +175,14 @@ closeArticleModal.addEventListener("click", () => {
 	modalArticle.style.display = "none";
 });
 
-
 // sign up function
 signupForm.addEventListener("submit", (e) => {
 	e.preventDefault();
 
 	// get user info
-	// const email = signupForm["signupEmail"].value;
-	// const password = signupForm["signupPassword"].value;
-	// const signupUsername = signupForm["signupUsername"].value;
-
-  const signupUsername = e.target.signupUsername.value
-  const email = e.target.signupEmail.value
-  const password = e.target.signupPassword.value
+	const email = signupForm["signupEmail"].value;
+	const password = signupForm["signupPassword"].value;
+	const signupUsername = signupForm["signupUsername"].value;
 
 
 
