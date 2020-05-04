@@ -345,11 +345,34 @@ footer{
 	margin: 0 0 0 1rem;
 }
 
-p.description + div {
+.displayCommentToggle {
+	background: var(--tertiary);
+	border: 1px solid var(--primaryDark);
+	margin: 10px 0;
+	display: inline-block;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+.displayCommentToggle:hover {
+	cursor: pointer;
+	background: #ffe9dc;
+}
+
+.displayCommentToggle:active {
+	background: #c0aa9c;
+}
+
+
+.displayCommentToggle + div {
 	margin-top: 10px;
 	width: 100%;
 	background: var(--primaryMed);
 	border-radius: 0 0 0.5rem 0.5rem;
+	display: none;
+}
+
+.displayCommentToggle.showing + div {
+	display: block;
 }
 
 .commentList li,
@@ -380,6 +403,7 @@ padding: 10px;
 width: 150px;
 background: var(--tertiary);
 border: 1px solid var(--primaryDark);
+border-radius: 5px;
 }
 
 .commentList h3{

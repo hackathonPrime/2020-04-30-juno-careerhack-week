@@ -26,6 +26,7 @@ const createArticle = function(article) {
 				<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
 				<p class="timePosted">${date}</p>
 		<p class="description"> ${description} </p>
+		<button class="displayCommentToggle">Show / Add Comments</button>
 		<div class="comment${_id}">
 		<ul class="commentList">
 		</ul>
@@ -102,6 +103,8 @@ function fetchAndPrintComments() {
 		});
 }
 
+
+// display comments function
 const displayComments = function () {
 	// have to empty out the lists for the search filters to work properly
 	const commentLists = document.getElementsByClassName('commentList')
@@ -127,7 +130,20 @@ const displayComments = function () {
 			}
 		});
 	}
+	commentShowToggleFunction();
 };
+
+// toggle comments visibility
+const commentShowToggleFunction = function(){
+	const commentShow = document.getElementsByClassName('displayCommentToggle');
+	for (let i = 0; i<commentShow.length; i++) {
+		commentShow[i].addEventListener('click',()=>{
+				commentShow[i].classList.toggle('showing')
+		})
+
+	}
+}
+
 
 // display articles according to search filter
 const searchFunction = function (query) {
@@ -221,6 +237,8 @@ auth.onAuthStateChanged((user) => {
 		welcomeMessage.closest("li").style.display = "inline";
 		welcomeMessage.innerHTML = `Welcome, ${user.displayName}`;
 	} else {
+		userObject.username = 'Guest';
+		userObject.email = 'guest@gmail.com';
 		logoutLink.closest("li").style.display = "none";
 		loginLink.closest("li").style.display = "inline";
 		signupLink.closest("li").style.display = "inline";
