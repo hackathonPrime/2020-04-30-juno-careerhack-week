@@ -18,6 +18,8 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 	--accent1: #E54B4B;
 	--accent2: #45BB7F;
 	--writingSize: 1.75rem;
+	--body: "Playfair Display", serif;
+	--title: 'Pacifico', cursive;
 }
 
 html {
@@ -38,6 +40,12 @@ body{
 	font-size: var(--writingSize);
 }
 
+body,
+::placeholder,
+button, input {
+	font-family: var(--body);
+}
+
 h1,
 h2,
 h4,
@@ -45,6 +53,14 @@ h4,
 p {
 	margin: 0;
 }
+
+/* comment out for options */
+
+h1 {
+	font-family: var(--title);
+}
+
+
 
 header{
 	width:100%;
