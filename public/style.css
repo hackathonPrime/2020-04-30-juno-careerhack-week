@@ -659,6 +659,14 @@ footer {
 	flex-direction: row;
 }
 
+.website:hover{
+	color:var(--tertiary)
+}
+
+.newsTitle:hover{
+	color:var(--primaryMed)
+}
+
 @media (max-width: 1041px) {
 	header .wrapper {
 		width: 100%;
