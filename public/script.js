@@ -4,7 +4,7 @@ const addCommentForm = function (id) {
 	const form = `<form action="" class="commentForm">
 <input class="articleID" aria-hidden="true" type="text" name="articleID" value="${id}" disabled="true">
 <label for="comment">Leave a Comment</label>
-<textarea class="commentTextArea" name="comment"></textarea>
+<textarea required="true" class="commentTextArea" name="comment"></textarea>
 <input value="Submit Comment" class="submitCommentButton" type="submit">
 <div id="commentOut"></div>
 </form>`;
