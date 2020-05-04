@@ -746,7 +746,8 @@ h4 {
 }
 
 .commentTime {
-	width: 40%;
+	/* width: 40%; */
+	width: auto;
 	text-align: right;
 }
 
@@ -770,6 +771,14 @@ footer {
 footer a:hover {
 	color: #ffe9dc;
 	text-decoration: underline;
+}
+
+.website:hover {
+	color: var(--tertiary);
+}
+
+.newsTitle:hover {
+	color: var(--primaryMed);
 }
 
 @media (max-width: 1041px) {
