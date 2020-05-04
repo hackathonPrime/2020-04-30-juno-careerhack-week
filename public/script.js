@@ -1,44 +1,133 @@
 // display all articles
 const newsContainer = document.querySelector(".newsContainer");
-const addCommentForm = function(id){
-const form = `<form action="" class="commentForm">
+const addCommentForm = function (id) {
+	const form = `<form action="" class="commentForm">
 <input class="articleID" aria-hidden="true" type="text" name="articleID" value="${id}" disabled="true">
-<label for="comment">Comments:</label>
-<input type="textarea" name="comment">
-<input class="commentButton" value="Add Comment" type="submit">
-</form>`
-console.log(id)
-return form
-}
-
+<label for="comment">Leave a Comment</label>
+<textarea class="commentTextArea" name="comment"></textarea>
+<input value="Submit Comment" class="submitCommentButton" type="submit">
+<div id="commentOut"></div>
+</form>`;
+	let commentForm;
+	return form;
+};
 const voting = `<div class="voteContainer">
 <button class="upVote"><span class="sr-only">upvote this article</span><i class="fas fa-caret-up"></i></button> 5
 <button class="downVote"><span class="sr-only">downvote this article</span><i class="fas fa-caret-down"></i></button> 0
 </div>`;
+
+const createArticle = function(article) {
+	const { _id, created_at, description, link, title } = article;
+				const utcDate = created_at;
+				const localDate = new Date(utcDate);
+				const date = localDate.toDateString().split(" ").slice(1, 4).join(" ");
+				const htmlToAppend = ` <li class="article ${_id}">
+				${voting}
+				<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
+				<p class="timePosted">${date}</p>
+		<p class="description"> ${description} </p>
+		<div class="comment${_id}">
+		<ul class="commentList">
+		</ul>
+		${addCommentForm(_id)}
+		</div>
+	</li>`;
+				newsContainer.innerHTML += htmlToAppend;
+				commentForm = document.getElementsByClassName(".commentForm");
+}
 function fetchAndPrintData() {
 	fetch("/api/data/articles")
 		.then((data) => data.json())
 		.then((json) => {
 			json.reverse();
 			json.forEach((article) => {
-				console.log(article);
-				const { _id, created_at, description, link, title } = article;
-				const utcDate = created_at;
-				const localDate = new Date(utcDate);
-				const date = localDate.toDateString().split(" ").slice(1, 4).join(" ");
-				console.log(date)
-				const htmlToAppend = ` <li class="article ${_id}">
-				${voting}
-				<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
-				<p class="timePosted">${date}</p>
-		<p class="description"> ${description} </p>
-		${addCommentForm(_id)}
-	</li>`;
-				newsContainer.innerHTML += htmlToAppend;
+				createArticle(article);
 			});
-    });
-    
+
+			fetchAndPrintComments();
+
+			document.body.addEventListener(
+				"submit",
+				function (e) {
+					e.preventDefault();
+					if (e.target.className === "commentForm") {
+						const articleID = e.target.articleID.value;
+						const comment = e.target.comment.value;
+						const username = userObject.username;
+						const email = userObject.email;
+						fetch("/api/data/comments", {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({ comment, username, email, articleID }),
+						}).then((res, err) => {
+							fetchAndPrintComments();
+							e.target.reset();
+						});
+					}
+				},
+				false
+			);
+		});
 }
+
+const commentObj = {};
+
+function fetchAndPrintComments() {
+	for (let key in commentObj) delete commentObj[key];
+	fetch("api/data/comments")
+		.then((data) => data.json())
+		.then((json) => {
+			const commentArray = [];
+			// for each comment get the article's id that it's written on
+			json.forEach((comment) => {
+				commentArray.push(comment.articleID);
+			});
+			// get an array of only the unique article ID's
+			const uniqueArray = commentArray.filter((v, i, a) => a.indexOf(v) === i);
+			// set those unique article ID's to be keys in the comment object
+			for (let id in uniqueArray) {
+				commentObj[uniqueArray[id]] = [];
+			}
+			// for each comment that matches on of the comment object's keys, push those comment objects to that array.
+			json.forEach((comment) => {
+				for (let articleID in commentObj) {
+					if (articleID == comment.articleID) {
+						commentObj[articleID].push(comment);
+					}
+				}
+			});
+			displayComments();
+		});
+}
+
+const displayComments = function () {
+	// have to empty out the lists for the search filters to work properly
+	const commentLists = document.getElementsByClassName('commentList')
+	for(let i=0; i<commentLists.length; i++) {
+		commentLists[i].innerHTML = ''
+	}
+	// for each comment in each thread, construct a comment
+	for (let thread in commentObj) {
+		commentObj[thread].forEach((comment) => {
+			const commentTime = new Date(comment.created_at).toTimeString().split("-")[0].split(" ")[0];
+			const commentDate = new Date(comment.created_at).toDateString();
+			const htmlToAppend = `<li>
+		<h3>${comment.username}</h3>
+		<p class="commentTime">${commentTime} ${commentDate}</p>
+		<p class="commentMessage">${comment.comment}</p>
+		</li>`;
+			// target the proper article's thread
+			const threadFocus = document.querySelector(`.comment${thread} ul`);
+			if (threadFocus){
+
+				// post all the comments to that thread
+				threadFocus.innerHTML += htmlToAppend;
+			}
+		});
+	}
+};
 
 // display articles according to search filter
 const searchFunction = function (query) {
@@ -49,19 +138,9 @@ const searchFunction = function (query) {
 			newsContainer.innerHTML = "";
 			json.forEach((article) => {
 				if (article.title.toLowerCase().includes(query) || article.description.toLowerCase().includes(query)) {
-					const { created_at, description, link, title } = article;
-					const utcDate = created_at;
-					const localDate = new Date(utcDate);
-					const date = localDate.toDateString();
-					const time = localDate.toTimeString().split("-");
-					const htmlToAppend = ` <li class="article">
-					<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
-					<p class="timePosted"	>posted ${date} ${time[0]}</p>
-            <p class="description"> ${description} </p>
-			${commentForm}
-		</li>`;
-					newsContainer.innerHTML += htmlToAppend;
+					createArticle(article)
 				}
+				fetchAndPrintComments();
 			});
 		});
 };
@@ -98,11 +177,9 @@ function submitForm() {
 		},
 		body: JSON.stringify({ title, description, link }),
 	}).then(() => {
-		newsContainer.innerHTML = '';
+		newsContainer.innerHTML = "";
 		fetchAndPrintData();
 		postArticleForm.reset();
-
-
 	});
 }
 // article form
@@ -121,7 +198,7 @@ const postArticleLink = document.querySelector("#postArticleLink");
 const loginLink = document.querySelector("#loginLink");
 const signupLink = document.querySelector("#signupLink");
 const logoutLink = document.querySelector("#logout");
-const welcomeMessage = document.querySelector('.welcomeMessage')
+const welcomeMessage = document.querySelector(".welcomeMessage");
 
 // form constants for display purposes
 const modalSignup = document.querySelector(".modalSignup");
@@ -131,20 +208,23 @@ const closeSignupModal = document.querySelector(".closeSignupModal");
 const closeLoginModal = document.querySelector(".closeLoginModal");
 const closeArticleModal = document.querySelector(".closeArticleModal");
 
+const userObject = {};
 // listen for auth status changes
 auth.onAuthStateChanged((user) => {
 	// determine which auth nav links to display based on signed in/out
 	if (user) {
+		userObject.username = user.displayName;
+		userObject.email = user.email;
 		loginLink.closest("li").style.display = "none";
 		signupLink.closest("li").style.display = "none";
 		logoutLink.closest("li").style.display = "inline";
-		welcomeMessage.closest('li').style.display = "inline"
-		welcomeMessage.innerHTML = `Welcome, ${user.displayName}`
+		welcomeMessage.closest("li").style.display = "inline";
+		welcomeMessage.innerHTML = `Welcome, ${user.displayName}`;
 	} else {
 		logoutLink.closest("li").style.display = "none";
 		loginLink.closest("li").style.display = "inline";
 		signupLink.closest("li").style.display = "inline";
-		welcomeMessage.closest('li').style.display = "none"
+		welcomeMessage.closest("li").style.display = "none";
 	}
 });
 
@@ -152,13 +232,13 @@ auth.onAuthStateChanged((user) => {
 signupLink.addEventListener("click", () => {
 	modalSignup.style.display = "block";
 	modalLogin.style.display = "none";
-	modalArticle.style.display = "none"
+	modalArticle.style.display = "none";
 });
 // show login modal
 loginLink.addEventListener("click", () => {
 	modalLogin.style.display = "block";
 	modalSignup.style.display = "none";
-	modalArticle.style.display = "none"
+	modalArticle.style.display = "none";
 });
 
 // show post article modal
@@ -186,11 +266,13 @@ signupForm.addEventListener("submit", (e) => {
 	e.preventDefault();
 
 	// get user info
-	const email = signupForm["signupEmail"].value;
-	const password = signupForm["signupPassword"].value;
-	const signupUsername = signupForm["signupUsername"].value;
+	// const email = signupForm["signupEmail"].value;
+	// const password = signupForm["signupPassword"].value;
+	// const signupUsername = signupForm["signupUsername"].value;
 
-
+	const signupUsername = e.target.signupUsername.value;
+	const email = e.target.signupEmail.value;
+	const password = e.target.signupPassword.value;
 
 	// sign up this user in firebase
 	auth.createUserWithEmailAndPassword(email, password).then((cred) => {
