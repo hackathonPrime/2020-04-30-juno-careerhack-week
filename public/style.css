@@ -321,6 +321,15 @@ footer{
 	padding: 0.185rem;
 }
 
+.welcome {
+	background: none;
+	border: none;
+}
+
+.welcome:hover{
+	background:none
+}
+
 @media(max-width:761px){
 	header{
 		flex-direction: column;
