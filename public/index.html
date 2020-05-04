@@ -10,8 +10,6 @@
 </head>
   <body>
     <header>
-
-        <img src="" alt="LOGO">
         <div class="title">
           <h1>Prime News</h1>
           <form action="#" class="searchForm">
@@ -19,8 +17,10 @@
               <input class="searchField" type="text" name="search" id="search" placeholder="Filter Articles">
               <label class="sr-only" for="search">Filter Articles</label>
             </div>
-            <input class="searchButton" type="submit">
-            <button class="clearFilter searchButton">clear filter</button>
+            <div class="headButtons">
+              <input class="searchButton"  value="Find" type="submit">
+              <button class="clearFilter searchButton">Clear Filter</button>
+            </div>
           </form>
         </div>
         <nav class="navbar">
@@ -38,7 +38,7 @@
               <a id="loginLink" href="#" class="" data-target="modal-login">Login</a>
             </li>
             <li class="loggedOut">
-              <a id="signupLink" href="#" class="" data-target="modal-signup">Sign up</a>
+              <a id="signupLink" href="#" class="" data-target="modal-signup">Sign-Up</a>
             </li>
           </ul>
         </nav>

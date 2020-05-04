@@ -3,9 +3,9 @@ const newsContainer = document.querySelector(".newsContainer");
 const addCommentForm = function(id){
 const form = `<form action="" class="commentForm">
 <input class="articleID" aria-hidden="true" type="text" name="articleID" value="${id}" disabled="true">
-<label for="comment">enter comment below</label>
+<label for="comment">Comments:</label>
 <input type="textarea" name="comment">
-<input type="submit">
+<input class="commentButton" type="submit">
 </form>`
 console.log(id)
 return form
