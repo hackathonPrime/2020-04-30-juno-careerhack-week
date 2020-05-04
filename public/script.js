@@ -28,9 +28,11 @@ const createArticle = function(article) {
 		${addCommentForm(_id)}
 		</div>
 	</li>`;
-				newsContainer.innerHTML += htmlToAppend;
-				commentForm = document.getElementsByClassName(".commentForm");
+
+	newsContainer.innerHTML += htmlToAppend;
+	commentForm = document.getElementsByClassName(".commentForm");
 }
+
 function fetchAndPrintData() {
 	fetch("/api/data/articles")
 		.then((data) => data.json())
