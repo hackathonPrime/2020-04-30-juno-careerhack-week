@@ -10,14 +10,14 @@
 </head>
   <body>
     <header>
-      <section class="headerContainer">
+
         <img src="" alt="LOGO">
         <div class="title">
           <h1>Prime News</h1>
           <form action="#" class="searchForm">
             <div>
-              <input type="text" name="search" id="search" placeholder="Filter Articles">
-              <label for="search">Filter Articles</label>
+              <input class="searchField" type="text" name="search" id="search" placeholder="Filter Articles">
+              <label class="sr-only" for="search">Filter Articles</label>
             </div>
             <input class="searchButton" type="submit">
             <button class="clearFilter searchButton">clear filter</button>
@@ -42,7 +42,7 @@
             </li>
           </ul>
         </nav>
-      </section>  
+
     </header>
     <div class="wrapper">
       <Main>
@@ -50,35 +50,26 @@
           <div class="modalContent">
             <button class="closeSignupModal"><span class="sr-only">close form</span>X</button>
             <h4>Sign-Up</h4>
-            <form id="signupForm">
-              <div class="inputField">
+            <form class="signupForm" id="signupForm">
                 <input type="text" placeholder="Username" name="signupUsername" id="signupUsername" required>
-                <label for="signupUsername">Username</label>
+                <label class="sr-only" for="signupUsername">Username</label>
                 <input type="email" placeholder="Email Address" id="signupEmail" required />
-                <label for="signupEmail">Email Address</label>
-              </div>
-              <div class="input-field">
+                <label class="sr-only" for="signupEmail">Email Address</label>
                 <input type="password" placeholder="Password" id="signupPassword" required />
-                <label for="signupPassword">Choose Password</label>
-              </div>
+                <label class="sr-only" for="signupPassword">Choose Password</label>
               <button class="formButton">Sign-Up</button>
             </form>
           </div>
         </div>
-        
         <div id="modalLogin" class="modalLogin">
           <div class="modalContent">
             <button class="closeLoginModal"><span class="sr-only">close form</span>X</button>
             <h4>Login</h4>
-            <form id="loginForm">
-              <div class="inputField">
+            <form class="loginForm" id="loginForm">
                 <input type="email" placeholder="Email Address" id="loginEmail" required />
-                <label for="loginEmail">Email Address</label>
-              </div>
-              <div class="inputField">
+                <label class="sr-only" for="loginEmail">Email Address</label>
                 <input type="password" placeholder="Password" id="loginPassword" required />
-                <label for="loginPassword">Your Password</label>
-              </div>
+                <label class="sr-only" for="loginPassword">Your Password</label>
               <button class="formButton">Login</button>
             </form>
           </div>
