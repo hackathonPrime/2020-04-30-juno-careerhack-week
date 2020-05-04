@@ -18,6 +18,8 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 	--accent1: #E54B4B;
 	--accent2: #45BB7F;
 	--writingSize: 1.75rem;
+	--body: "Playfair Display", serif;
+	--title: 'Pacifico', cursive;
 }
 
 html {
@@ -38,13 +40,35 @@ body{
 	font-size: var(--writingSize);
 }
 
+body,
+::placeholder,
+button, input {
+	font-family: var(--body);
+}
+
 h1,
 h2,
-h4,
+h3,
 h4,
 p {
 	margin: 0;
 }
+
+h1 {
+	font-family: var(--title);
+	margin: 10rem auto 0;
+	width: 80%;
+}
+
+ul,
+li {
+	list-style-position: outside;
+	list-style-type: none;
+	padding:0;
+}
+/* comment out for options */
+
+
 
 header{
 	width:100%;
@@ -52,10 +76,19 @@ header{
 	position:fixed;
 	top:0;
 	z-index: 2;
-	padding: 5px;
+	padding: 10px 0;
 }
 
-header, 
+header .wrapper {
+	width: 95%;
+	display:flex;
+	flex-direction:row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	margin: 0 auto;
+	/* padding: 0 6%; */
+}
+
 .nav, 
 .title form{
 	display:flex;
@@ -65,8 +98,7 @@ header,
 .title{
 	display:flex;
 	flex-direction:column;
-	width:50%;
-	margin-left:50px;
+	width:40%;
 }
 
 .searchForm {
@@ -93,13 +125,13 @@ header,
 }
 
 .navbar{
-	width:50%;
+	width:40%;
 }
 
 .nav{
 	justify-content: right;
 	align-items: center;
-	margin: 40.25px 10% 0;
+	margin: 0;
 }
 
 li{
@@ -139,7 +171,8 @@ a{
 }
 
 .wrapper{
-	margin:0 5rem;
+	margin:0 auto;
+	width: 90%;
 	max-width:130rem;
 }
 
@@ -238,7 +271,7 @@ footer{
 }
 
 .newsContainer {
-	margin: 15rem auto;
+	margin: 0 auto 15rem;
 	width: 80%;
 }
 
@@ -301,24 +334,61 @@ footer{
 	visibility: hidden;
 }
 
+
 .commentForm {
 	margin: 0 0 0 8.2rem;
 }
-
 .newsContainer h2 {
 	width:100%;
 }
-
 .description {
 	margin: 0 0 0 1rem;
 }
 
-.commentForm {
-	margin: 0 0 0 1rem;
+p.description + div {
+	margin-top: 10px;
+	width: 100%;
+	background: var(--primaryMed);
+	border-radius: 0 0 0.5rem 0.5rem;
 }
 
-.commentButton{
-	padding: 0.185rem;
+.commentList li,
+.commentForm {
+	background: var(--primaryLight);
+	padding: 5px;
+	margin: 10px auto;
+	width: calc(100% - 20px);
+	border-radius: 0;
+}
+
+.commentForm {
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.commentTextArea {
+	width: 100%;
+	max-width: 100%;
+	margin: 0 auto;
+	height: 70px;
+}
+
+.submitCommentButton {
+margin:10px auto;
+padding: 10px;
+width: 150px;
+background: var(--tertiary);
+border: 1px solid var(--primaryDark);
+}
+
+.commentList h3{
+	width: 60%;
+}
+
+.commentTime {
+	width: 40%;
+	text-align: right;
 }
 
 .welcome {
@@ -329,6 +399,14 @@ footer{
 .welcome:hover{
 	background:none
 }
+.commentMessage {
+	display: inline-block;
+	margin-top: 10px;
+	width: 100%;
+	padding: 5px;
+	background: var(--secondary);
+}
+
 
 @media(max-width:761px){
 	header{
@@ -336,12 +414,12 @@ footer{
 	}
 
 	.title, .navbar{
-		width:100%
+		width:100%;
 	}
 
 	.nav{
 		justify-content: left;
-		margin:1rem 0.5rem
+		margin:1rem 0.5rem;
 	}
 
 	.modalSignup, 
@@ -351,7 +429,7 @@ footer{
 	}
 
 	.wrapper{
-		margin:0 3rem
+		margin:0 3rem;
 	}
 
 	.newsContainer{
@@ -361,18 +439,20 @@ footer{
 }	
 
 @media(max-width:435px){
+	
 	.title form{
 		flex-direction: column;
 	}
-	.searchButton{
-		margin:1rem 0.5rem
+
+	.nav {
+		padding: 0;
 	}
 
-	.newsContainer {
-		margin: 20rem auto;
+	.searchButton{
+		margin:1rem 0.5rem;
 	}
 
 	.commentButton{
-		margin-top:1rem
+		margin-top:1rem;
 	}
 }

@@ -5,13 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hackathon News</title>
-  <link rel="stylesheet" href="style.css">
   <script src="https://kit.fontawesome.com/8ffef1b7fa.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
   <body>
     <header>
+      <div class="wrapper">
         <div class="title">
-          <h1>Prime News</h1>
           <form action="#" class="searchForm">
             <div>
               <input class="searchField" type="text" name="search" id="search" placeholder="Filter Articles">
@@ -42,10 +43,11 @@
             </li>
           </ul>
         </nav>
-
+      </div>
     </header>
     <div class="wrapper">
       <Main>
+        <h1>Prime News</h1>
         <div id="modalSignup" class="modalSignup">
           <div class="modalContent">
             <button class="closeSignupModal"><span class="sr-only">close form</span>X</button>

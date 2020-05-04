@@ -80,29 +80,37 @@ db.on('error', err => {
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-  user: 'string',
-  email: 'string',
-});
 
+const commentSchema = new Schema({
+  comment: 'string', 
+  username: 'string', 
+  email: 'string',
+  articleID: 'string'
+}, {timestamps: {createdAt: 'created_at'}})
 
 //add 
 const articleSchema = new Schema({
   title: 'string',
-  
   link: 'string',
   description: 'string',
   votes: Number,
-  comments: [{body: 'string', by: mongoose.Schema.Types.ObjectId}]
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 }, {timestamps: {createdAt: 'created_at'}})
+
+//when you comment, get li id for database entry
+//get username from firebase.auth obj
+//
+
+
+
 
 
 //compile a model
 
 //somehow connect oauth to this
-const User = mongoose.model('User', userSchema);
+// const User = mongoose.model('User', userSchema);
 const Article = mongoose.model('Article', articleSchema);
-
+const Comment = mongoose.model('Comment', commentSchema);
 
 //delete all
 // Article.deleteMany({}, function (err) {
@@ -110,6 +118,10 @@ const Article = mongoose.model('Article', articleSchema);
 //   console.log('successful deletion')
 // });
 
+// Comment.deleteMany({}, function (err) {
+//   if (err) console.log(err);
+//   console.log('successful deletion')
+// });
 
 // Create the server app
 const app = express();
@@ -125,6 +137,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // You will be hooking it up to Mongo as part of your assignment.
 
 // const dataService = new DataService();
+
 
 
 // =========== API ROUTES ===========
@@ -147,6 +160,23 @@ app.get('/api/data/articles', async (req, res) => {
   }
 })
 
+app.get('/api/data/comments', async (req, res) => {
+  try {
+    const result = await Comment.find().exec()
+    res.send(result)
+  } catch (err) {
+    res.send(err)
+  }
+})
+
+app.get('/api/data/article/:id'), async (req, res) => {
+  try {
+    const result = await Comment.findById(req.para)
+  } catch (err) {
+    res.send(err)
+  }
+}
+
 // Save a data object
 // POST /api/data
 // SAMPLE PAYLOAD: { title: "Your title goes here", description: "Your description goes here" }
@@ -168,15 +198,17 @@ app.post('/api/data/articles', async (req, res) => {
   }
 })
 
-app.post('/api/data/users', async (req, res) => {
+app.post('/api/data/comments', async (req, res) => {
   try {
-    const user = User.create(req.body);
-    const result = await user.save();
-    res.send(result);
+    const comment = new Comment(req.body)
+    const result = await comment.save();
+    res.send(result)
   } catch (err) {
-    res.status(500).send(error)
+    res.status(500).send(err)
   }
 })
+
+
 
 
 // Start the application
