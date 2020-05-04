@@ -40,10 +40,17 @@ body{
 
 h1,
 h2,
-h4,
+h3,
 h4,
 p {
 	margin: 0;
+}
+
+ul,
+li {
+	list-style-position: outside;
+	list-style-type: none;
+	padding:0;
 }
 
 header{
@@ -233,7 +240,7 @@ footer{
 
 .newsContainer li {
 	position: relative;
-	padding: 10px;
+	padding: 10px 0 0 0;
 	width: 100%;
 	margin: 20px 0;
 	display: flex;
@@ -290,6 +297,55 @@ footer{
 	visibility: hidden;
 }
 
+p.description + div {
+	margin-top: 10px;
+	width: 100%;
+	background: var(--primaryMed);
+}
+
+.commentList li,
 .commentForm {
-	margin: 0 0 0 82px;
+	background: var(--primaryLight);
+	padding: 5px;
+	margin: 10px auto;
+	width: calc(100% - 20px);
+	border-radius: 0;
+}
+
+.commentForm {
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.commentTextArea {
+	width: 100%;
+	max-width: 100%;
+	margin: 0 auto;
+	height: 70px;
+}
+
+.submitCommentButton {
+margin:10px auto;
+padding: 10px;
+width: 150px;
+background: var(--tertiary);
+border: 1px solid var(--primaryDark);
+}
+
+.commentList h3{
+	width: 60%;
+}
+
+.commentTime {
+	width: 40%;
+	text-align: right;
+}
+
+.commentMessage {
+	display: inline-block;
+	margin-top: 10px;
+	width: 100%;
+	padding: 5px;
+	background: var(--secondary);
 }
