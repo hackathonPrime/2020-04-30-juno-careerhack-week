@@ -5,7 +5,7 @@ const form = `<form action="" class="commentForm">
 <input class="articleID" aria-hidden="true" type="text" name="articleID" value="${id}" disabled="true">
 <label for="comment">Comments:</label>
 <input type="textarea" name="comment">
-<input class="commentButton" type="submit">
+<input class="commentButton" value="Add Comment" type="submit">
 </form>`
 console.log(id)
 return form

@@ -305,6 +305,22 @@ footer{
 	margin: 0 0 0 8.2rem;
 }
 
+.newsContainer h2 {
+	width:100%;
+}
+
+.description {
+	margin: 0 0 0 1rem;
+}
+
+.commentForm {
+	margin: 0 0 0 1rem;
+}
+
+.commentButton{
+	padding: 0.185rem;
+}
+
 @media(max-width:761px){
 	header{
 		flex-direction: column;
@@ -325,25 +341,15 @@ footer{
 		width: 70%;
 	}
 
-	.newsContainer h2 {
-		width:100%;
-	}
-
-	.description {
-		margin: 0 0 0 1rem;
-	}
-
-	.commentForm {
-		margin: 0 0 0 1rem;
+	.wrapper{
+		margin:0 3rem
 	}
 
 	.newsContainer{
 		padding:0;
 		width:100%
 	}
-
 }	
-
 
 @media(max-width:435px){
 	.title form{
