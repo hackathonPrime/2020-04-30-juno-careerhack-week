@@ -17,16 +17,12 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 	--tertiary: #EDD3C4;
 	--accent1: #E54B4B;
 	--accent2: #45BB7F;
+	--writingSize: 1.75rem;
 }
 
 html {
 	font-size: 62.5%;
 }
-
-body {
-	background: var(--secondary);
-}
-
 
 .hidden {
 	display: none;
@@ -37,15 +33,31 @@ label {
 	display: block;
 }
 
+body{
+	background: var(--secondary);
+	font-size: var(--writingSize);
+}
+
+h1,
+h2,
+h4,
+h4,
+p {
+	margin: 0;
+}
+
 header{
 	width:100%;
 	background: var(--primaryLight);
 	position:fixed;
 	top:0;
 	z-index: 2;
+	padding: 5px;
 }
 
-.headerContainer, .nav, .title form{
+header, 
+.nav, 
+.title form{
 	display:flex;
 	flex-direction:row;
 }
@@ -53,29 +65,72 @@ header{
 .title{
 	display:flex;
 	flex-direction:column;
-	width:60%;
+	width:50%;
 	margin-left:50px;
 }
 
+.searchForm {
+	font-size: 1.6rem;
+}
+
+.searchForm input,
+.searchForm button {
+	border:none;
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	background-color: var(--tertiary);
+	border: 1px solid var(--primaryDark);
+	font-size: 1.6rem;
+}
+
+.searchForm .searchField {
+	background: var(--secondary);
+}
+
 .searchButton{
-	height:50%;
 	width: fit-content;
 	margin-left:20px;
 }
 
 .navbar{
-	width:40%;
+	width:50%;
 }
 
 .nav{
 	justify-content: right;
-	align-items: baseline;
-	margin-right:50px;
+	align-items: center;
+	margin: 40.25px 10% 0;
 }
 
 li{
 	list-style-type: none;
-	padding:10px;
+	font-size: 1.6rem;
+	background: var(--tertiary);
+	border: 0.1rem solid var(--primaryDark);
+	border-radius: 0.5rem;
+	margin: 0 0.5rem;
+}
+
+nav li, .searchButton{
+	width:auto;
+	flex-shrink:0
+}
+
+nav a{
+	padding:0.5rem 1rem;
+	display: inline-block;
+	text-align: center;
+}
+
+nav li:hover,
+.searchForm input:not(.searchField):hover,
+.searchForm button:hover {
+	background: #ffe9dc;
+}
+nav li:active,
+.searchForm input:not(.searchField):active,
+.searchForm button:active {
+	background: #c0aa9c;
 }
 
 a{
@@ -84,52 +139,89 @@ a{
 }
 
 .wrapper{
-	margin:0 50px;
-	max-width:1300px;
+	margin:0 5rem;
+	max-width:130rem;
 }
 
-.modalSignup, .modalLogin,
+.modalSignup, 
+.modalLogin,
 .modalArticle{
-	width: 100%;
-	display:flex;
-	align-items: center;
-	justify-content: center;
-	margin-top:300px;
+	width: 45%;
 	display:none;
+	position:fixed;
+	top:50%;
+	left:50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+	box-shadow: 0 2px 5px 5px #665b60a1;
+	border-radius: 5px;
+	
 }
 
 .closeSignupModal,
 .closeLoginModal,
 .closeArticleModal {
 	position: absolute;
-	top: 20px;
-	right: 20px;
+	top: 2rem;
+	right: 2rem;
+	border-radius:100%;
+	border:0.2rem solid var(--primaryDark);
+	background:var(--tertiary);
+	padding:0.5rem 1rem 0.2rem;
+}
+
+.closeSignupModal:active,
+.closeLoginModal:active,
+.closeArticleModal:active {
+	background: #c0aa9c;
 }
 
 /* footer covers bottom of page gotta make it so bottom is shown by being able to scroll more. */
-
 
 .modalContent{
 	display:flex;
 	flex-direction:column;
 	align-items: center;
 	text-align: center;
-	background: var(--primaryMed);
-	width:60%;
-	padding:75px 0;
-	font-size:20px;
+	background: var(--primaryLight);
+	padding:7.5rem 0;
+	font-size:var(--writingSize);
 	position: relative;
+	border-radius: 5px;
 }
 
-.postArticleForm{
-	margin-top:150px;
-	font-size:20px;
+.postArticleForm,
+.signupForm, 
+.loginForm{
+	font-size:var(--writingSize);
+	text-align:center;
+	display:flex;
+	flex-direction:column;
+	width:70%;
+}
+
+.postArticleForm input,
+.signupForm input,
+.loginForm input,
+.formButton{
+	margin-top:2rem;
+	padding:1rem;
+	border: 0.2rem solid var(--primaryDark)
+}
+
+.formButton{
+	padding:1rem 0;
+	background: var(--tertiary)
+}
+
+.formButton:active {
+	background: #c0aa9c;
 }
 
 h4{
-	font-size: 50px;
+	font-size: 5rem;
 	margin:0;
-	padding-bottom:20px;
+	padding-bottom:2rem;
 }
 
 footer{
@@ -138,6 +230,7 @@ footer{
 	background: var(--primaryLight);
 	width:100%;
 	text-align:center;
+	/* z-index:10; */
 }
 
 .hide {
@@ -145,32 +238,49 @@ footer{
 }
 
 .newsContainer {
-	margin-top: 150px;
-	margin-bottom: 150px;;
+	margin: 15rem auto;
+	width: 80%;
 }
 
 .newsContainer li {
 	position: relative;
-	margin: 20px auto;
-	width: 80%;
-	max-width: 800px;
+	padding: 1rem;
+	width: 100%;
+	margin: 2rem 0;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	background: #FAFAFA;
-	border-radius: 5px;
+	border-radius: 0.5rem;
 	border: 2px solid var(--primaryLight);
 }
 
+.timePosted {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	width: 10rem;
+	margin:1rem;
+}
+.description {
+	margin: 0 0 0 8.2rem;
+	width: 100%;
+	font-size: 1.6rem;
+}
+
 .newsContainer h2 {
-	margin: 10px;
+	font-size: 2rem;
+	margin: 1rem;
+	width: calc(100% - 202px);
 }
 
 .voteContainer {
 	position: relative;
-	padding: 10px;
+	padding: 1rem;
 	display: flex;
 	align-items: center;
+	font-size: 1.5rem;
+	width: 7.2rem;
 }
 
 .upVote,
@@ -185,4 +295,75 @@ footer{
 }
 .downVote {
 	color: var(--accent1);
+}
+
+.articleID {
+	visibility: hidden;
+}
+
+.commentForm {
+	margin: 0 0 0 8.2rem;
+}
+
+.newsContainer h2 {
+	width:100%;
+}
+
+.description {
+	margin: 0 0 0 1rem;
+}
+
+.commentForm {
+	margin: 0 0 0 1rem;
+}
+
+.commentButton{
+	padding: 0.185rem;
+}
+
+@media(max-width:761px){
+	header{
+		flex-direction: column;
+	}
+
+	.title, .navbar{
+		width:100%
+	}
+
+	.nav{
+		justify-content: left;
+		margin:1rem 0.5rem
+	}
+
+	.modalSignup, 
+	.modalLogin,
+	.modalArticle{
+		width: 70%;
+	}
+
+	.wrapper{
+		margin:0 3rem
+	}
+
+	.newsContainer{
+		padding:0;
+		width:100%
+	}
+}	
+
+@media(max-width:435px){
+	.title form{
+		flex-direction: column;
+	}
+	.searchButton{
+		margin:1rem 0.5rem
+	}
+
+	.newsContainer {
+		margin: 20rem auto;
+	}
+
+	.commentButton{
+		margin-top:1rem
+	}
 }

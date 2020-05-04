@@ -2,10 +2,10 @@
 const newsContainer = document.querySelector(".newsContainer");
 const addCommentForm = function(id){
 const form = `<form action="" class="commentForm">
-<input type="text" name="articleID" value="${id}" disabled="true">
-<label for="comment">enter comment below</label>
+<input class="articleID" aria-hidden="true" type="text" name="articleID" value="${id}" disabled="true">
+<label for="comment">Comments:</label>
 <input type="textarea" name="comment">
-<input type="submit">
+<input class="commentButton" value="Add Comment" type="submit">
 </form>`
 console.log(id)
 return form
@@ -25,12 +25,12 @@ function fetchAndPrintData() {
 				const { _id, created_at, description, link, title } = article;
 				const utcDate = created_at;
 				const localDate = new Date(utcDate);
-				const date = localDate.toDateString();
-				const time = localDate.toTimeString().split("-");
+				const date = localDate.toDateString().split(" ").slice(1, 4).join(" ");
+				console.log(date)
 				const htmlToAppend = ` <li class="article ${_id}">
 				${voting}
 				<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
-				<p>posted on ${date} at ${time[0]}</p>
+				<p class="timePosted">${date}</p>
 		<p class="description"> ${description} </p>
 		${addCommentForm(_id)}
 	</li>`;
@@ -55,7 +55,7 @@ const searchFunction = function (query) {
 					const time = localDate.toTimeString().split("-");
 					const htmlToAppend = ` <li class="article">
 					<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
-					<p>posted on ${date} at ${time[0]}</p>
+					<p class="timePosted"	>posted ${date} ${time[0]}</p>
             <p class="description"> ${description} </p>
 			${commentForm}
 		</li>`;
@@ -97,8 +97,10 @@ function submitForm() {
 		},
 		body: JSON.stringify({ title, description, link }),
 	}).then(() => {
+		newsContainer.innerHTML = '';
 		fetchAndPrintData();
 		postArticleForm.reset();
+
 	});
 }
 // article form
@@ -148,16 +150,20 @@ auth.onAuthStateChanged((user) => {
 signupLink.addEventListener("click", () => {
 	modalSignup.style.display = "block";
 	modalLogin.style.display = "none";
+	modalArticle.style.display = "none"
 });
 // show login modal
 loginLink.addEventListener("click", () => {
 	modalLogin.style.display = "block";
 	modalSignup.style.display = "none";
+	modalArticle.style.display = "none"
 });
 
 // show post article modal
 postArticleLink.addEventListener("click", () => {
 	modalArticle.style.display = "block";
+	modalLogin.style.display = "none";
+	modalSignup.style.display = "none";
 });
 
 // close signup
