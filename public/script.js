@@ -36,7 +36,8 @@ function fetchAndPrintData() {
 	</li>`;
 				newsContainer.innerHTML += htmlToAppend;
 			});
-		});
+    });
+    
 }
 
 // display articles according to search filter
@@ -100,6 +101,7 @@ function submitForm() {
 		newsContainer.innerHTML = '';
 		fetchAndPrintData();
 		postArticleForm.reset();
+
 
 	});
 }
@@ -188,17 +190,7 @@ signupForm.addEventListener("submit", (e) => {
 	const password = signupForm["signupPassword"].value;
 	const signupUsername = signupForm["signupUsername"].value;
 
-	//add this user to our database
 
-	fetch("/api/data/users", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ signupUsername, email }),
-	}).then(() => {
-		console.log("user added");
-	});
 
 	// sign up this user in firebase
 	auth.createUserWithEmailAndPassword(email, password).then((cred) => {
