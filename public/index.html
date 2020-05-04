@@ -10,17 +10,17 @@
 </head>
   <body>
     <header>
-      <section class="headerContainer">
-        <img src="" alt="LOGO">
         <div class="title">
           <h1>Prime News</h1>
           <form action="#" class="searchForm">
             <div>
-              <input type="text" name="search" id="search" placeholder="Filter Articles">
-              <label for="search">Filter Articles</label>
+              <input class="searchField" type="text" name="search" id="search" placeholder="Filter Articles">
+              <label class="sr-only" for="search">Filter Articles</label>
             </div>
-            <input class="searchButton" type="submit">
-            <button class="clearFilter searchButton">clear filter</button>
+            <div class="headButtons">
+              <input class="searchButton"  value="Find" type="submit">
+              <button class="clearFilter searchButton">Clear Filter</button>
+            </div>
           </form>
         </div>
         <nav class="navbar">
@@ -38,11 +38,11 @@
               <a id="loginLink" href="#" class="" data-target="modal-login">Login</a>
             </li>
             <li class="loggedOut">
-              <a id="signupLink" href="#" class="" data-target="modal-signup">Sign up</a>
+              <a id="signupLink" href="#" class="" data-target="modal-signup">Sign-Up</a>
             </li>
           </ul>
         </nav>
-      </section>  
+
     </header>
     <div class="wrapper">
       <Main>
@@ -50,36 +50,27 @@
           <div class="modalContent">
             <button class="closeSignupModal"><span class="sr-only">close form</span>X</button>
             <h4>Sign-Up</h4>
-            <form id="signupForm">
-              <div class="inputField">
-                <input type="text" placeholder="username" name="signupUsername" id="signupUsername" required>
-                <label for="signupUsername">username</label>
+            <form class="signupForm" id="signupForm">
+                <input type="text" placeholder="Username" name="signupUsername" id="signupUsername" required>
+                <label class="sr-only" for="signupUsername">Username</label>
                 <input type="email" placeholder="Email Address" id="signupEmail" required />
-                <label for="signupEmail">Email Address</label>
-              </div>
-              <div class="input-field">
+                <label class="sr-only" for="signupEmail">Email Address</label>
                 <input type="password" placeholder="Password" id="signupPassword" required />
-                <label for="signupPassword">Choose Password</label>
-              </div>
-              <button class="">Sign-Up</button>
+                <label class="sr-only" for="signupPassword">Choose Password</label>
+              <button class="formButton">Sign-Up</button>
             </form>
           </div>
         </div>
-        
         <div id="modalLogin" class="modalLogin">
           <div class="modalContent">
             <button class="closeLoginModal"><span class="sr-only">close form</span>X</button>
             <h4>Login</h4>
-            <form id="loginForm">
-              <div class="inputField">
+            <form class="loginForm" id="loginForm">
                 <input type="email" placeholder="Email Address" id="loginEmail" required />
-                <label for="loginEmail">Email Address</label>
-              </div>
-              <div class="inputField">
+                <label class="sr-only" for="loginEmail">Email Address</label>
                 <input type="password" placeholder="Password" id="loginPassword" required />
-                <label for="loginPassword">Your Password</label>
-              </div>
-              <button class="">Login</button>
+                <label class="sr-only" for="loginPassword">Your Password</label>
+              <button class="formButton">Login</button>
             </form>
           </div>
         </div>
@@ -89,35 +80,18 @@
             <button class="closeArticleModal"><span class="sr-only">close form</span>X</button>
             <h4>Publish an Article</h4>
             <form onsubmit="submitForm()" class="postArticleForm" id="submit-form" action="/api/data/articles" method="POST">
-              <p>
-                <label for="title">
-                  Title:
-                  <input name="title" required/>
-                </label>
-              </p>
-              <p>
-                <label for="link">
-                  Link:
-                  <input name="link" type="text" required/>
-                </label>
-              </p>
-              <p>
-                <label for="description">
-                  Description:
-                  <input name="description" type="text" />
-                </label>
-              </p>
-              <p>
-                <input type="submit"></input>
-              </p>
+                <label class="sr-only" for="title">Title:</label>
+                  <input name="title" placeholder="Title" required/>
+                <label class="sr-only" for="link"> Link:</label>
+                  <input name="link" placeholder="URL Link" type="text" required/>
+                <label class="sr-only" for="description"> Description:</label>
+                  <input name="description"  placeholder="Description" type="text" />
+                <input class="formButton" type="submit"></input>
             </form>
           </div>
         </div>
-
-        <div>
           <ul class="newsContainer">
           </ul>
-        </div>
       </Main>
       </div>
       <footer> 
