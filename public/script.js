@@ -6,7 +6,9 @@ const form = `<form action="" class="commentForm">
 <label for="comment">enter comment below</label>
 <input type="textarea" name="comment">
 <input type="submit">
+<div id="commentOut"></div>
 </form>`
+let commentForm;
 console.log(id)
 return form
 }
@@ -34,10 +36,44 @@ function fetchAndPrintData() {
 		<p class="description"> ${description} </p>
 		${addCommentForm(_id)}
 	</li>`;
-				newsContainer.innerHTML += htmlToAppend;
-			});
+        newsContainer.innerHTML += htmlToAppend;        
+        commentForm = document.getElementsByClassName(".commentForm");
+      })
+      document.body.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (e.target.className === 'commentForm') {
+          const articleID = e.target.articleID.value;
+          const comment = e.target.comment.value;
+          const username = userObject.username;
+          const email = userObject.email;
+          console.log(articleID, comment, username, email)
+          fetch("/api/data/comments", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ comment, username, email, articleID }),
+          }).then((err) => {
+            if (err, res) console.log(err);
+            console.log(res)
+            fetchAndPrintComments();
+          })
+        }
+      }, false);
 		});
 }
+
+function fetchAndPrintComments() {
+  fetch('api/data/comments')
+  .then((data) => data.json())
+  .then((json) => {
+    console.log(json)
+  })
+}
+
+
+
+
 
 
 
@@ -133,14 +169,14 @@ const closeLoginModal = document.querySelector(".closeLoginModal");
 const closeArticleModal = document.querySelector(".closeArticleModal");
 
 
-const userObjects = {}
+const userObject = {}
 // listen for auth status changes
 auth.onAuthStateChanged((user) => {
 
 	// determine which auth nav links to display based on signed in/out
 	if (user) {
-    userObjects.username = user.displayName;
-    userObjects.email = user.email;
+    userObject.username = user.displayName;
+    userObject.email = user.email;
 		loginLink.closest("li").style.display = "none";
 		signupLink.closest("li").style.display = "none";
 		logoutLink.closest("li").style.display = "inline";
