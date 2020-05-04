@@ -11,10 +11,6 @@ const addCommentForm = function (id) {
 	let commentForm;
 	return form;
 };
-const voting = `<div class="voteContainer">
-<button class="upVote"><span class="sr-only">upvote this article</span><i class="fas fa-caret-up"></i></button> 5
-<button class="downVote"><span class="sr-only">downvote this article</span><i class="fas fa-caret-down"></i></button> 0
-</div>`;
 
 const createArticle = function(article) {
 	const { _id, created_at, description, link, title } = article;
@@ -22,7 +18,6 @@ const createArticle = function(article) {
 				const localDate = new Date(utcDate);
 				const date = localDate.toDateString().split(" ").slice(1, 4).join(" ");
 				const htmlToAppend = ` <li class="article ${_id}">
-				${voting}
 				<h2 class="newsTitle"> <a href="${link}" rel="noopener" target="_blank"> ${title} </a> </h2>
 				<p class="timePosted">${date}</p>
 		<p class="description"> ${description} </p>
@@ -139,6 +134,11 @@ const commentShowToggleFunction = function(){
 	for (let i = 0; i<commentShow.length; i++) {
 		commentShow[i].addEventListener('click',()=>{
 				commentShow[i].classList.toggle('showing')
+				if (commentShow[i].className.includes('showing')) {
+					commentShow[i].textContent = 'Hide Comments'
+				} else {
+					commentShow[i].textContent = 'Show / Add Comments'
+				}
 		})
 
 	}
@@ -304,7 +304,6 @@ signupForm.addEventListener("submit", (e) => {
 					displayName: signupUsername,
 				})
 				.then(() => {
-					// console.log(user.displayName)
 					displayName = user.displayName;
 				});
 		}
@@ -328,6 +327,5 @@ loginForm.addEventListener("submit", (e) => {
 logoutLink.addEventListener("click", (e) => {
 	e.preventDefault();
 	auth.signOut().then(() => {
-		console.log("user has signed out");
 	});
 });
