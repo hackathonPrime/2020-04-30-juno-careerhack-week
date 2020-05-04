@@ -14,10 +14,8 @@
       <div class="wrapper">
         <div class="title">
           <form action="#" class="searchForm">
-            <div>
               <input class="searchField" type="text" name="search" id="search" placeholder="Filter Articles">
               <label class="sr-only" for="search">Filter Articles</label>
-            </div>
             <div class="headButtons">
               <input class="searchButton"  value="Find" type="submit">
               <button class="clearFilter searchButton">Clear Filter</button>
@@ -26,15 +24,17 @@
         </div>
         <nav class="navbar">
           <ul class="nav">
-            <li class="loggedIn">
+            <li class="loggedIn welcome">
               <p class="welcomeMessage"></p>
             </li>
-            <li class="postArticle">
-              <a href="#" id="postArticleLink">Post Article</a>
-            </li>
-            <li class="loggedIn">
-              <a href="#" class="" id="logout">Logout</a>
-            </li>
+            <div class="navButtons">
+              <li class="postArticle">
+                <a href="#" id="postArticleLink">Post Article</a>
+              </li>
+              <li class="loggedIn">
+                <a href="#" class="" id="logout">Logout</a>
+              </li>
+            </div>
             <li class="loggedOut">
               <a id="loginLink" href="#" class="" data-target="modal-login">Login</a>
             </li>
