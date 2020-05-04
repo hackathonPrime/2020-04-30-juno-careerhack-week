@@ -98,7 +98,7 @@ const articleSchema = new Schema({
   link: 'string',
   description: 'string',
   votes: Number,
-  comments: [commentSchema]
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 }, {timestamps: {createdAt: 'created_at'}})
 
 //when you comment, get li id for database entry
@@ -122,6 +122,10 @@ const Comment = mongoose.model('Comment', commentSchema);
 //   console.log('successful deletion')
 // });
 
+// Comment.deleteMany({}, function (err) {
+//   if (err) console.log(err);
+//   console.log('successful deletion')
+// });
 
 // Create the server app
 const app = express();
@@ -137,6 +141,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // You will be hooking it up to Mongo as part of your assignment.
 
 // const dataService = new DataService();
+
 
 
 // =========== API ROUTES ===========

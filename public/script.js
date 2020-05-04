@@ -53,8 +53,8 @@ function fetchAndPrintData() {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ comment, username, email, articleID }),
-          }).then((err) => {
-            if (err, res) console.log(err);
+          }).then((res, err) => {
+            if (res, err) console.log(err);
             console.log(res)
             fetchAndPrintComments();
           })
